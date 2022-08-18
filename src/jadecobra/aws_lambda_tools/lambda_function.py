@@ -1,11 +1,12 @@
 import shutil
+import zipfile
 
 from . import lambda_deployer
 
 
 class LambdaFunction(lambda_deployer.LambdaDeployer):
 
-    def __init__(self, function_name, bucket_name=None, profile_name=None):
+    def __init__(self, function_name: str = None, bucket_name=None, profile_name=None):
         super().__init__(bucket_name=bucket_name, profile_name=profile_name)
         self.function_name = function_name
         self.package_code()
@@ -14,31 +15,39 @@ class LambdaFunction(lambda_deployer.LambdaDeployer):
         self.delimiter()
         self.delete_zipfile()
 
-    def directory(self):
-        return 'lambdas'
+    @staticmethod
+    def directory():
+        return "lambda_functions"
 
     def zip_filename(self):
-        return f'{self.function_name}.zip'
+        return f"{self.function_name}.zip"
 
     def python_filename(self):
-        return f'{self.function_name}.py'
+        return f"{self.function_name}.py"
+
 
     def package_code(self):
+        # add everything in the folder except files/directories named tests
         self.delimiter()
-        print(f'Zipping up {self.function_name} ...')
-        shutil.make_archive(self.function_name, 'zip', root_dir=self.function_name)
+        print(f"\tzipping up {self.function_name} ...")
+        with zipfile.ZipFile(self.zip_filename(), "w", compresslevel=9) as compressor:
+            for filename in os.listdir():
+                if "tests" in filename or filename.endswith(".zip") or "scent.py" in filename:
+                    continue
+                else:
+                    compressor.write(filename)
 
     def update_lambda_code(self):
         self.delimiter()
-        message = f'Updating {self.function_name} Lambda code in {self.environment_name}::'
+        message = f'\tupdating {self.function_name} in {self.environment_name}::'
         try:
             self.lambda_client.update_function_code(
                 FunctionName=self.function_name,
-                S3_Bucket=self.s3_bucket,
+                S3Bucket=self.s3_bucket,
                 S3Key=self.s3_key(),
                 Publish=True,
             )
         except self.lambda_client.exceptions.ClientError as error:
-            print(f'{message} FAILED::{error}')
+            print(f"{message}:{error}")
         else:
-            print(f'{message}Success')
+            print(f"{message}:success")

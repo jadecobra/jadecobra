@@ -1,7 +1,6 @@
 import boto3
 import os
 import shutil
-import zipfile
 
 
 class LambdaDeployer:
@@ -14,7 +13,8 @@ class LambdaDeployer:
         self.s3_bucket = bucket_name
         self.region = region
         self.session = boto3.session.Session(
-            region_name=self.region, profile_name=profile_name
+            region_name=self.region,
+            profile_name=profile_name,
         )
         self.s3 = self.session.client("s3")
         self.lambda_client = self.session.client("lambda")

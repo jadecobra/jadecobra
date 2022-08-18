@@ -4,9 +4,8 @@ watch_paths = ['tests/', 'src/']
 
 @sniffer.api.runnable
 def run_tests(*args):
-    if not subprocess.run(
+    if subprocess.run(
         'python -m unittest -f tests/*.*',
         shell=True
-    ).returncode:
-        return False
-    return True
+    ).returncode == 0:
+        return True
