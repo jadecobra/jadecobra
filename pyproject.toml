@@ -1,6 +1,6 @@
 [project]
 name = "jadecobra"
-version = "0.0.2"
+version = "0.0.5"
 authors = [
   { name="johnnyblase", email="johnnyblasin@gmail.com" },
 ]
@@ -13,7 +13,8 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = ["boto3"]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Homepage" = "https://github.com/pypa/jadecobra"
+"Bug Tracker" = "https://github.com/pypa/jadecobra/issues"
