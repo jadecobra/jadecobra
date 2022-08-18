@@ -12,7 +12,9 @@ def main():
         help="Package and Deploy a Lambda Function to S3. Update the Lambda Function if it exists",
     )
     parser.add_argument(
-        "-l", "--publish_layer", nargs="+", help="Package and Publish Lambda Layer(s)"
+        "-l", "--publish_layer",
+        nargs="+",
+        help="Package and Publish Lambda Layer(s)"
     )
     parser.add_argument("-b", "--bucket_name", required=True)
     parser.add_argument("-p", "--profile_name")
