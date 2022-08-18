@@ -1,6 +1,7 @@
-import lambda_deployer
 import os
 import shutil
+
+from . import lambda_deployer
 
 
 class LambdaLayer(lambda_deployer.LambdaDeployer):

@@ -1,5 +1,6 @@
 import shutil
-import lambda_deployer
+
+from . import lambda_deployer
 
 
 class LambdaFunction(lambda_deployer.LambdaDeployer):
@@ -25,7 +26,7 @@ class LambdaFunction(lambda_deployer.LambdaDeployer):
     def package_code(self):
         self.delimiter()
         print(f'Zipping up {self.function_name} ...')
-        shutil.make_archive(self.function, 'zip', root_dir=self.function_name)
+        shutil.make_archive(self.function_name, 'zip', root_dir=self.function_name)
 
     def update_lambda_code(self):
         self.delimiter()

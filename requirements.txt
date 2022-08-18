@@ -3,3 +3,4 @@ macfsevents
 twine
 wheel
 build
+boto3
