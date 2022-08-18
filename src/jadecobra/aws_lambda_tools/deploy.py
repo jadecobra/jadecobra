@@ -1,6 +1,6 @@
 import argparse
-import lambda_function
-import lambda_layer
+from . import lambda_function
+from . import lambda_layer
 
 def main():
     parser = argparse.ArgumentParser(
