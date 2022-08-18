@@ -1,6 +1,6 @@
 [project]
-name = "$project_name"
-version = "0.0.2"
+name = "jadecobra"
+version = "0.0.1"
 authors = [
   { name="johnnyblase", email="johnnyblasin@gmail.com" },
 ]
