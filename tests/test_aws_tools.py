@@ -4,7 +4,7 @@ import jadecobra.aws.deploy_lambda_function
 import jadecobra.aws.deploy_lambda
 import jadecobra.aws.deploy_lambda_layer
 import src.jadecobra.aws.deploy
-
+import src.jadecobra.
 
 class TestAwsLambdaTools(unittest.TestCase):
 
@@ -52,7 +52,7 @@ class TestAwsLambdaTools(unittest.TestCase):
     def test_lambda_function(self):
         with self.assertRaises(TypeError):
             src.jadecobra.aws.deploy_lambda_function.LambdaFunction(
-                function_name='bob'
+                function_name='bob_function'
             )
 
     def test_lambda_function_attributes(self):
@@ -63,5 +63,5 @@ class TestAwsLambdaTools(unittest.TestCase):
     def test_lambda_layer(self):
         with self.assertRaises(TypeError):
             src.jadecobra.aws.deploy_lambda_layer.LambdaLayer(
-                dependencies='bob'
+                dependencies='bob_layer'
             )
