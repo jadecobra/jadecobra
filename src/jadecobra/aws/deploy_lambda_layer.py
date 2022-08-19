@@ -1,10 +1,10 @@
 import os
 import shutil
 
-from . import lambda_deployer
+from . import deploy_lambda
 
 
-class LambdaLayer(lambda_deployer.LambdaDeployer):
+class LambdaLayer(deploy_lambda.LambdaDeployer):
 
     def __init__(
         self, dependencies=None, bucket_name=None, profile_name="DEV", name=None

@@ -1,1 +1,1 @@
-from . import lambda_deployer
+from . import deploy_lambda

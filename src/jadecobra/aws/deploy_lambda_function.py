@@ -2,10 +2,10 @@ import shutil
 import zipfile
 import os
 
-from . import lambda_deployer
+from . import deploy_lambda
 
 
-class LambdaFunction(lambda_deployer.LambdaDeployer):
+class LambdaFunction(deploy_lambda.LambdaDeployer):
 
     def __init__(self, function_name: str = None, bucket_name=None, profile_name=None):
         super().__init__(bucket_name=bucket_name, profile_name=profile_name)
