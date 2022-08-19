@@ -2,7 +2,7 @@ import json
 import unittest
 
 
-class TestTemplates(unittest.TestCase):
+class TestCase(unittest.TestCase):
 
     maxDiff = None
 
@@ -15,4 +15,10 @@ class TestTemplates(unittest.TestCase):
         self.assertEqual(
             self.get_template(f"cdk.out/{stack_name}"),
             self.get_template(f"tests/fixtures/{stack_name}")
+        )
+
+    def assert_attributes_equal(self, thing=None, attributes=None):
+        self.assertEqual(
+            sorted(dir(thing)),
+            attributes
         )

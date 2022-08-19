@@ -13,6 +13,7 @@ class TestBuild(unittest.TestCase):
             'already removed'
 
     def test_z_build(self):
+        return
         self.remove_dist()
         os.system('python3 -m build')
         os.system('python3 -m twine upload dist/*')
