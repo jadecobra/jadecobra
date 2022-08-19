@@ -16,5 +16,5 @@ classifiers = [
 dependencies = ["boto3"]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/jadecobra"
-"Bug Tracker" = "https://github.com/pypa/jadecobra/issues"
+"Homepage" = "https://github.com/jadecobra/jadecobra"
+"Bug Tracker" = "https://github.com/jadecobra/jadecobra/issues"
