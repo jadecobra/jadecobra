@@ -1,19 +1,14 @@
-import unittest
-import boto3
-import jadecobra.aws.deploy_lambda_function
-import jadecobra.aws.deploy_lambda
-import jadecobra.aws.deploy_lambda_layer
-import src.jadecobra.aws.deploy
-import src.jadecobra.
+import src.jadecobra.aws.deploy_lambda
+import src.jadecobra.toolkit
 
-class TestAwsLambdaTools(unittest.TestCase):
+class TestAwsLambdaTools(src.jadecobra.toolkit.TestCase):
 
     def test_lambda_deployer(self):
         src.jadecobra.aws.deploy_lambda.LambdaDeployer()
 
     def test_lambda_deployer_attributes(self):
-        self.assertEqual(
-            sorted(dir(src.jadecobra.aws.deploy_lambda.LambdaDeployer)),
+        self.assert_attributes_equal(
+            src.jadecobra.aws.deploy_lambda.LambdaDeployer,
             [
                 '__class__',
                 '__delattr__',
@@ -48,20 +43,3 @@ class TestAwsLambdaTools(unittest.TestCase):
                 'upload_to_s3'
             ]
         )
-
-    def test_lambda_function(self):
-        with self.assertRaises(TypeError):
-            src.jadecobra.aws.deploy_lambda_function.LambdaFunction(
-                function_name='bob_function'
-            )
-
-    def test_lambda_function_attributes(self):
-        self.assertEqual(
-            sorted(dir())
-        )
-
-    def test_lambda_layer(self):
-        with self.assertRaises(TypeError):
-            src.jadecobra.aws.deploy_lambda_layer.LambdaLayer(
-                dependencies='bob_layer'
-            )

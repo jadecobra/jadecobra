@@ -1,12 +1,17 @@
-import src.jadecobra.aws.environment
+import src.jadecobra.aws.deploy_lambda_function
 import src.jadecobra.toolkit
 
+class TestAwsDeployLambdaFunction(src.jadecobra.toolkit.TestCase):
 
-class TestAwsEnvironment(src.jadecobra.toolkit.TestCase):
+    def test_deploy_lambda_function(self):
+        with self.assertRaises(TypeError):
+            src.jadecobra.aws.deploy_lambda_function.LambdaFunction(
+                function_name='bob_function'
+            )
 
-    def test_environment_attributes(self):
+    def test_deploy_lambda_function_attributes(self):
         self.assert_attributes_equal(
-            src.jadecobra.aws.environment.Environment,
+            src.jadecobra.aws.deploy_lambda_function.LambdaFunction,
             [
                 '__class__',
                 '__delattr__',
@@ -34,17 +39,15 @@ class TestAwsEnvironment(src.jadecobra.toolkit.TestCase):
                 '__str__',
                 '__subclasshook__',
                 '__weakref__',
-                'account_id',
-                'arn',
-                'aws_environment',
-                'aws_profile',
-                'base_cidr',
-                'environment_name',
-                'get_environment',
-                'iam_role_arn',
-                'name_tag',
-                'region',
-                'today',
-                'vpc_id'
+                'delete_directory',
+                'delete_zipfile',
+                'delimiter',
+                'directory',
+                'package_code',
+                'python_filename',
+                's3_key',
+                'update_lambda_code',
+                'upload_to_s3',
+                'zip_filename'
             ]
         )
