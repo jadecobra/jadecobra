@@ -3,6 +3,7 @@ import pathlib
 import time
 import os
 import json
+import shutil
 import unittest
 
 
@@ -23,7 +24,6 @@ class TestCase(unittest.TestCase):
 
     def assert_attributes_equal(self, thing=None, attributes=None):
         self.assertEqual(sorted(dir(thing)), attributes)
-
 
 def logger(message, level="INFO"):
     print(f"[{level}] {message}")
@@ -73,5 +73,17 @@ def header(environment):
 
 def time_it(function, *args, description='run process', **kwargs):
     start_time = time.time()
-    function(*args, **kwargs)
+    result = function(*args, **kwargs)
     log(f'Time taken to {description}::{time.time() - start_time:.1f} seconds')
+    return result
+
+def remove_dist():
+    try:
+        shutil.rmtree('dist')
+    except FileNotFoundError:
+        'already removed'
+
+def build_and_publish():
+    remove_dist()
+    os.system('python3 -m build')
+    os.system('python3 -m twine upload dist/*')
