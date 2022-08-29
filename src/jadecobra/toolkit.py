@@ -40,7 +40,9 @@ class TestCase(unittest.TestCase):
         self.remove_dist()
         os.system(f'git commit -am "{self.get_commit_message()}"')
         os.system('python3 -m build')
-        os.system('python3 -m twine upload dist/*')
+        self.assertEqual(
+            os.system('python3 -m twine upload dist/*'), 0
+        )
 
 def logger(message, level="INFO"):
     print(f"[{level}] {message}")
