@@ -150,7 +150,7 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 'file_exists',
                 'header',
                 'json',
-                'log',
+                'log_performance',
                 'logger',
                 'make_dir',
                 'os',
