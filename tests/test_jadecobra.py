@@ -146,6 +146,7 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 'delimiter',
                 'error',
                 'file_exists',
+                'get_commit_message',
                 'header',
                 'json',
                 'log',
