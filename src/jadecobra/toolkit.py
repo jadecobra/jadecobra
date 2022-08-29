@@ -39,6 +39,7 @@ class TestCase(unittest.TestCase):
     def build_and_publish(self):
         self.remove_dist()
         os.system(f'git commit -am "{self.get_commit_message()}"')
+        os.system('git push')
         os.system('python3 -m build')
         self.assertEqual(
             os.system('python3 -m twine upload dist/*'), 0
