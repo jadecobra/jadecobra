@@ -83,16 +83,19 @@ def write_file(filepath, data):
 def delimiter():
     print("="*80)
 
-def log(message):
-    print(f"{datetime.datetime.now()}::{message}\n")
-
 def header(environment):
     delimiter()
     print(f"\t[WARNING] You are making changes to the {environment} Environment [WARNING]")
     delimiter()
 
+def log(message):
+    performance = f"{datetime.datetime.now()}:{message}\n"
+    with open('logs/performance.log', '+') as file:
+        file.write(performance)
+    print(performance)
+
 def time_it(function, *args, description='run process', **kwargs):
     start_time = time.time()
     result = function(*args, **kwargs)
-    log(f'Time taken to {description}::{time.time() - start_time:.1f} seconds')
+    log(f'{description}:{time.time() - start_time:.1f}')
     return result
