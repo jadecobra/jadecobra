@@ -88,14 +88,16 @@ def header(environment):
     print(f"\t[WARNING] You are making changes to the {environment} Environment [WARNING]")
     delimiter()
 
-def log(message):
+def log_performance(message):
     performance = f"{datetime.datetime.now()}:{message}\n"
-    with open('logs/performance.log', '+') as file:
-        file.write(performance)
+    logs_path = 'tests/logs'
+    os.makedirs(logs_path, exist_ok=True)
+    with open(f'{logs_path}/performance.log', 'a') as writer:
+        writer.write(performance)
     print(performance)
 
 def time_it(function, *args, description='run process', **kwargs):
     start_time = time.time()
     result = function(*args, **kwargs)
-    log(f'{description}:{time.time() - start_time:.1f}')
+    log_performance(f'{description}:{time.time() - start_time:.1f}')
     return result
