@@ -83,7 +83,11 @@ def remove_dist():
     except FileNotFoundError:
         'already removed'
 
+def get_commit_message():
+    return input("Enter commit message: ")
+
 def build_and_publish():
     remove_dist()
+    os.system(f'git commit -am "{get_commit_message()}"')
     os.system('python3 -m build')
     os.system('python3 -m twine upload dist/*')
