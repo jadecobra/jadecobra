@@ -25,6 +25,23 @@ class TestCase(unittest.TestCase):
     def assert_attributes_equal(self, thing=None, attributes=None):
         self.assertEqual(sorted(dir(thing)), attributes)
 
+    @staticmethod
+    def remove_dist():
+        try:
+            shutil.rmtree('dist')
+        except FileNotFoundError:
+            'already removed'
+
+    @staticmethod
+    def get_commit_message():
+        return input("Enter commit message: ")
+
+    def build_and_publish(self):
+        self.remove_dist()
+        os.system(f'git commit -am "{self.get_commit_message()}"')
+        os.system('python3 -m build')
+        os.system('python3 -m twine upload dist/*')
+
 def logger(message, level="INFO"):
     print(f"[{level}] {message}")
 
@@ -76,18 +93,3 @@ def time_it(function, *args, description='run process', **kwargs):
     result = function(*args, **kwargs)
     log(f'Time taken to {description}::{time.time() - start_time:.1f} seconds')
     return result
-
-def remove_dist():
-    try:
-        shutil.rmtree('dist')
-    except FileNotFoundError:
-        'already removed'
-
-def get_commit_message():
-    return input("Enter commit message: ")
-
-def build_and_publish():
-    remove_dist()
-    os.system(f'git commit -am "{get_commit_message()}"')
-    os.system('python3 -m build')
-    os.system('python3 -m twine upload dist/*')
