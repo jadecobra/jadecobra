@@ -103,4 +103,4 @@ def time_it(function, *args, description='run process', **kwargs):
     return result
 
 def to_camel_case(text):
-    return ''.join(text.title()).split('-')
+    return ''.join(text.title().split('-'))

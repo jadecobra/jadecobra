@@ -164,3 +164,9 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 'write_file'
             ]
         )
+
+    def test_to_camel_case(self):
+        self.assertEqual(
+            src.jadecobra.toolkit.to_camel_case('abc-def-hij'),
+            'AbcDefHijfix '
+        )
