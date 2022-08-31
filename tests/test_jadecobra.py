@@ -158,6 +158,7 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 'shutil',
                 'time',
                 'time_it',
+                'to_camel_case',
                 'unittest',
                 'write_config',
                 'write_file'

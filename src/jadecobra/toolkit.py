@@ -101,3 +101,6 @@ def time_it(function, *args, description='run process', **kwargs):
     result = function(*args, **kwargs)
     log_performance(f'{description}:{time.time() - start_time:.1f}')
     return result
+
+def to_camel_case(text):
+    return ''.join(text.title()).split('-')
