@@ -77,7 +77,7 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
         shutil.make_archive(
             self.name, "zip",
             root_dir=self.directory(),
-            base_dir=self.runtime()
+            # base_dir=self.runtime()
         )
 
     def zip_filename(self):
