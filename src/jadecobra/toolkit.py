@@ -23,7 +23,9 @@ class TestCase(unittest.TestCase):
         )
 
     def assert_attributes_equal(self, thing=None, attributes=None):
-        self.assertEqual(sorted(dir(thing)), attributes)
+        self.assertEqual(
+            sorted(dir(thing)), sorted(attributes)
+        )
 
     @staticmethod
     def remove_dist():

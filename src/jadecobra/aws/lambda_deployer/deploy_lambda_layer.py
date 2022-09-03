@@ -7,19 +7,23 @@ from . import deploy_lambda
 class LambdaLayer(deploy_lambda.LambdaDeployer):
 
     def __init__(
-        self, dependencies=None, bucket_name=None, profile_name="DEV", name=None
+        self,
+        dependencies=None,
+        bucket_name=None,
+        profile_name="DEV",
+        name=None
     ):
         super().__init__(bucket_name=bucket_name, profile_name=profile_name)
         self.dependencies = dependencies
         self.set_name(name)
         self.delete_directory()
         self.package_layer()
-        self.upload_to_s3()
-        self.delete_previous_layer_version()
-        self.publish_layer()
-        self.delimiter()
-        self.delete_directory()
-        self.delete_zipfile()
+        # self.upload_to_s3()
+        # self.delete_previous_layer_version()
+        # self.publish_layer()
+        # self.delimiter()
+        # self.delete_directory()
+        # self.delete_zipfile()
 
     def set_name(self, name):
         try:
