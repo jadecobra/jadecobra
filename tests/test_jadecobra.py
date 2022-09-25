@@ -118,6 +118,7 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 'id',
                 'longMessage',
                 'maxDiff',
+                'push',
                 'remove_dist',
                 'run',
                 'setUp',

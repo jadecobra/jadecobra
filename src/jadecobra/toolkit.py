@@ -38,10 +38,13 @@ class TestCase(unittest.TestCase):
     def get_commit_message():
         return input("Enter commit message: ")
 
-    def build_and_publish(self):
-        self.remove_dist()
-        os.system(f'git commit -am "{self.get_commit_message()}"')
+    def push(self):
         os.system('git push')
+        os.system(f'git commit -am "{self.get_commit_message()}"')
+
+    def build_and_publish(self):
+        self.push()
+        self.remove_dist()
         os.system('python3 -m build')
         self.assertEqual(
             os.system('python3 -m twine upload dist/*'), 0
