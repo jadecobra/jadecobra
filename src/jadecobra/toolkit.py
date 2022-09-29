@@ -4,6 +4,7 @@ import time
 import os
 import json
 import shutil
+import subprocess
 import unittest
 
 
@@ -16,7 +17,25 @@ class TestCase(unittest.TestCase):
         with open(f'{filepath}.template.json') as template:
             return json.load(template)
 
+    def create_cdk_templates(self):
+        result = time_it(
+            subprocess.run,
+            (
+                'cdk ls '
+                '--no-version-reporting '
+                '--no-path-metadata '
+                '--no-asset-metadata'
+            ),
+            description=f'cdk ls',
+            shell=True,
+            capture_output=True,
+        )
+        print(result.stderr.decode())
+        print(result.stdout.decode())
+        self.assertEqual(result.returncode, 0)
+
     def assert_cdk_templates_equal(self, stack_name):
+        self.create_cdk_templates()
         self.assertEqual(
             self.get_template(f"cdk.out/{stack_name}"),
             self.get_template(f"tests/fixtures/{stack_name}")
