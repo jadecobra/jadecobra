@@ -35,7 +35,6 @@ class TestCase(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
 
     def assert_cdk_templates_equal(self, stack_name):
-        self.create_cdk_templates()
         self.assertEqual(
             self.get_template(f"cdk.out/{stack_name}"),
             self.get_template(f"tests/fixtures/{stack_name}")
