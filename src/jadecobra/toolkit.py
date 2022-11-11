@@ -52,13 +52,9 @@ class TestCase(unittest.TestCase):
         except FileNotFoundError:
             'already removed'
 
-    @staticmethod
-    def get_commit_message():
-        return input("Enter commit message: ")
-
     def push(self):
         os.system('git push')
-        os.system(f'git commit -am "{self.get_commit_message()}"')
+        os.system(f'git commit -am "{get_commit_message()}"')
 
     def build_and_publish(self):
         self.push()
@@ -127,3 +123,6 @@ def time_it(function, *args, description='run process', **kwargs):
 
 def to_camel_case(text):
     return ''.join(text.title().split('-'))
+
+def get_commit_message():
+    return input("Enter commit message: ")
