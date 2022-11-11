@@ -52,12 +52,9 @@ class TestCase(unittest.TestCase):
         except FileNotFoundError:
             'already removed'
 
-    def push(self):
-        os.system('git push')
-        os.system(f'git commit -am "{get_commit_message()}"')
 
     def build_and_publish(self):
-        self.push()
+        git_push()
         self.remove_dist()
         os.system('python3 -m build')
         self.assertEqual(
@@ -126,3 +123,7 @@ def to_camel_case(text):
 
 def get_commit_message():
     return input("Enter commit message: ")
+
+def git_push():
+    os.system('git push')
+    os.system(f'git commit -am "{get_commit_message()}"')
