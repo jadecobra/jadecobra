@@ -115,7 +115,7 @@ def log_performance(message):
         writer.write(performance)
     print(performance)
 
-def time_it(function, *args, description='run process', **kwargs):
+def time_it(*args, function=None, description='run process', **kwargs):
     start_time = time.time()
     result = function(*args, **kwargs)
     log_performance(f'{description}:{time.time() - start_time:.1f}')
