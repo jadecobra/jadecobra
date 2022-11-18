@@ -19,13 +19,13 @@ class TestCase(unittest.TestCase):
 
     def create_cdk_templates(self):
         result = time_it(
-            subprocess.run,
             (
                 'cdk ls '
                 '--no-version-reporting '
                 '--no-path-metadata '
                 '--no-asset-metadata'
             ),
+            function=subprocess.run,
             description=f'cdk ls',
             shell=True,
             capture_output=True,
