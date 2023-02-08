@@ -125,5 +125,5 @@ def get_commit_message():
     return input("Enter commit message: ")
 
 def git_push():
-    os.system('git push')
     os.system(f'git commit -am "{get_commit_message()}"')
+    os.system('git push')
