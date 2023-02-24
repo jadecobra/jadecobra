@@ -149,6 +149,8 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 'error',
                 'file_exists',
                 'get_commit_message',
+                'get_pyproject',
+                'get_pyproject_version',
                 'git_push',
                 'header',
                 'json',
@@ -157,12 +159,16 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 'make_dir',
                 'os',
                 'pathlib',
+                'pyproject',
+                're',
+                'semantic_version_pattern',
                 'shutil',
                 'subprocess',
                 'time',
                 'time_it',
                 'to_camel_case',
                 'unittest',
+                'update_pyproject_version',
                 'write_config',
                 'write_file'
             ]
@@ -172,4 +178,12 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
         self.assertEqual(
             src.jadecobra.toolkit.to_camel_case('abc-def-hij'),
             'AbcDefHij'
+        )
+
+    def test_update_version(self):
+        self.assertEqual(
+            src.jadecobra.toolkit.get_pyproject_version(
+                src.jadecobra.toolkit.get_pyproject()
+            ),
+            ('0.1.', '19') 
         )
