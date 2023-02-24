@@ -6,7 +6,6 @@ import json
 import re
 import shutil
 import subprocess
-from turtle import update
 import unittest
 
 
