@@ -148,7 +148,7 @@ def update_pyproject_version():
         filepath=pyproject(),
         data=re.sub(
             semantic_version_pattern(),
-            f'version="{version}{int(patch)+1}"',
+            f'version = "{version}{int(patch)+1}"',
             text
         )
     )
