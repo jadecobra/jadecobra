@@ -37,7 +37,7 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
         try:
             self.lambda_client.publish_layer_version(
                 LayerName=self.name,
-                CompatibleRuntimes=["python3.6", "python3.7", "python3.8"],
+                CompatibleRuntimes=["python3.6", "python3.7", "python3.8", "python3.9"],
                 Content={
                     "S3Bucket": self.s3_bucket,
                     "S3Key": self.s3_key(),
