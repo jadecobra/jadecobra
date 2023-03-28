@@ -64,7 +64,7 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
         try:
             for dependency in self.dependencies:
                 os.system(
-                    f"pip install --target ./{self.directory()}/{self.runtime()} {dependency} --upgrade"
+                    f"pip install --target ./{self.directory()}/{self.runtime()} {dependency} --upgrade --platform linux_x86_64 --platform linux_aarch64"
                 )
         except TypeError:
             print("No dependencies to install")
