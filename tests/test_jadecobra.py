@@ -185,5 +185,5 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
             src.jadecobra.toolkit.get_pyproject_version(
                 src.jadecobra.toolkit.get_pyproject()
             ),
-            ('0.1.', '24')
+            ('0.2.', '00')
         )
