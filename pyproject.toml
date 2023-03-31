@@ -1,6 +1,6 @@
 [project]
 name = "jadecobra"
-version = "0.2.3"
+version = "0.2.4"
 authors = [
   { name="johnnyblase", email="johnnyblasin@gmail.com" },
 ]
@@ -13,7 +13,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = ["boto3"]
+dependencies = ["boto3", "sniffer"]
 
 [project.urls]
 "Homepage" = "https://github.com/jadecobra/jadecobra"
