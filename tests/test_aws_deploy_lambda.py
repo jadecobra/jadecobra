@@ -1,14 +1,14 @@
-import src.jadecobra.aws_lambda.deploy.deploy_lambda
-import src.jadecobra.toolkit
+import jadecobra.aws_lambda.deploy.deploy_lambda
+import jadecobra.toolkit
 
-class TestAwsLambdaTools(src.jadecobra.toolkit.TestCase):
+class TestAwsLambdaTools(jadecobra.toolkit.TestCase):
 
     def test_lambda_deployer(self):
-        src.jadecobra.aws_lambda.deploy.deploy_lambda.LambdaDeployer()
+        jadecobra.aws_lambda.deploy.deploy_lambda.LambdaDeployer()
 
     def test_lambda_deployer_attributes(self):
         self.assert_attributes_equal(
-            src.jadecobra.aws_lambda.deploy.deploy_lambda.LambdaDeployer,
+            jadecobra.aws_lambda.deploy.deploy_lambda.LambdaDeployer,
             [
                 '__class__',
                 '__delattr__',

@@ -1,17 +1,17 @@
-import src.jadecobra.aws_lambda.deploy.deploy_lambda_function
-import src.jadecobra.toolkit
+import jadecobra.aws_lambda.deploy.deploy_lambda_function
+import jadecobra.toolkit
 
-class TestAwsDeployLambdaFunction(src.jadecobra.toolkit.TestCase):
+class TestAwsDeployLambdaFunction(jadecobra.toolkit.TestCase):
 
     def test_deploy_lambda_function(self):
         with self.assertRaises(TypeError):
-            src.jadecobra.aws_lambda.deploy.deploy_lambda_function.LambdaFunction(
+            jadecobra.aws_lambda.deploy.deploy_lambda_function.LambdaFunction(
                 function_name='bob_function'
             )
 
     def test_deploy_lambda_function_attributes(self):
         self.assert_attributes_equal(
-            src.jadecobra.aws_lambda.deploy.deploy_lambda_function.LambdaFunction,
+            jadecobra.aws_lambda.deploy.deploy_lambda_function.LambdaFunction,
             [
                 '__class__',
                 '__delattr__',

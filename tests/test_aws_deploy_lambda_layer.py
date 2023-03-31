@@ -1,17 +1,17 @@
-import src.jadecobra.aws_lambda.deploy.deploy_lambda_layer
-import src.jadecobra.toolkit
+import jadecobra.aws_lambda.deploy.deploy_lambda_layer
+import jadecobra.toolkit
 
-class TestAwsDeployLambdaLayer(src.jadecobra.toolkit.TestCase):
+class TestAwsDeployLambdaLayer(jadecobra.toolkit.TestCase):
 
     def test_deploy_lambda_layer(self):
         with self.assertRaises(FileNotFoundError):
-            src.jadecobra.aws_lambda.deploy.deploy_lambda_layer.LambdaLayer(
+            jadecobra.aws_lambda.deploy.deploy_lambda_layer.LambdaLayer(
                 dependencies=['bob_layer']
             )
 
     def test_deploy_lambda_layer_attributes(self):
         self.assert_attributes_equal(
-            src.jadecobra.aws_lambda.deploy.deploy_lambda_layer.LambdaLayer,
+            jadecobra.aws_lambda.deploy.deploy_lambda_layer.LambdaLayer,
             [
                 '__class__',
                 '__delattr__',

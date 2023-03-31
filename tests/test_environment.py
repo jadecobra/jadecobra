@@ -1,12 +1,12 @@
-import src.jadecobra.aws_environment
-import src.jadecobra.toolkit
+import jadecobra.aws_environment
+import jadecobra.toolkit
 
 
-class TestAwsEnvironment(src.jadecobra.toolkit.TestCase):
+class TestAwsEnvironment(jadecobra.toolkit.TestCase):
 
     def test_environment_attributes(self):
         self.assert_attributes_equal(
-            src.jadecobra.aws_environment.Environment,
+            jadecobra.aws_environment.Environment,
             [
                 '__class__',
                 '__delattr__',

@@ -1,12 +1,12 @@
 import unittest
-import src.jadecobra.toolkit
+import jadecobra.toolkit
 
 
-class TestJadeCobra(src.jadecobra.toolkit.TestCase):
+class TestJadeCobra(jadecobra.toolkit.TestCase):
 
     def test_toolkit_test_case_attributes(self):
         self.assert_attributes_equal(
-            src.jadecobra.toolkit.TestCase,
+            jadecobra.toolkit.TestCase,
             [
                 '__call__',
                 '__class__',
@@ -132,7 +132,7 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
 
     def test_toolkit(self):
         self.assert_attributes_equal(
-            src.jadecobra.toolkit,
+            jadecobra.toolkit,
             [
                 'TestCase',
                 '__builtins__',
@@ -176,14 +176,14 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
 
     def test_to_camel_case(self):
         self.assertEqual(
-            src.jadecobra.toolkit.to_camel_case('abc-def-hij'),
+            jadecobra.toolkit.to_camel_case('abc-def-hij'),
             'AbcDefHij'
         )
 
     def test_update_version(self):
         self.assertEqual(
-            src.jadecobra.toolkit.get_pyproject_version(
-                src.jadecobra.toolkit.get_pyproject()
+            jadecobra.toolkit.get_pyproject_version(
+                jadecobra.toolkit.get_pyproject()
             ),
             ('0.2.', '4')
         )
