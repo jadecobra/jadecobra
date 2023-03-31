@@ -186,6 +186,13 @@ class TestJadeCobra(jadecobra.toolkit.TestCase):
             jadecobra.toolkit.get_pyproject_version(
                 jadecobra.toolkit.get_pyproject()
             ),
-            # ('0.2.', '4'),
-            test.__version__
+            ('0.2.', '5'),
+            # test.__version__
+        )
+
+    def test_published_version_is_test_version(self):
+        import src.jadecobra
+        self.assertEqual(
+            jadecobra.__version__,
+            src.jadecobra.__version__
         )
