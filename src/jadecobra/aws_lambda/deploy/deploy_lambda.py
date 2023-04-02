@@ -7,7 +7,7 @@ class LambdaDeployer:
 
     def __init__(self, profile_name=None, bucket_name=None, region="us-west-2"):
         print('-'*70)
-        print(f'you are currently in {os.getcwd()}')
+        print(f'currently in {os.getcwd()}')
         print('-'*70)
         self.environment_name = profile_name
         self.s3_bucket = bucket_name
