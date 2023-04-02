@@ -199,6 +199,8 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
                 '__spec__',
                 'get_pyproject',
                 'get_pyproject_version',
+                'git_push',
+                'os',
                 'pyproject',
                 're',
                 'semantic_version_pattern',

@@ -1,4 +1,6 @@
 import re
+import os
+
 from . import toolkit
 
 def pyproject():
@@ -36,3 +38,12 @@ def update_version():
         filepath='src/jadecobra/__init__.py',
         data=f"__version__ = {version}{int(patch)+1}",
     )
+
+def git_push():
+    try:
+        update_pyproject_version()
+    except FileNotFoundError:
+        pass
+    finally:
+        os.system(f'git commit -am "{toolkit.get_commit_message()}"')
+        os.system('git push')
