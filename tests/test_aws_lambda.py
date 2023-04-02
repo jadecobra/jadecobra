@@ -1,12 +1,12 @@
-import jadecobra.aws_lambda
-import jadecobra.toolkit
+import src.jadecobra.aws_lambda
+import src.jadecobra.toolkit
 
 
-class TestAwsLambda(jadecobra.toolkit.TestCase):
+class TestAwsLambda(src.jadecobra.toolkit.TestCase):
 
     def test_aws_lambda(self):
         self.assert_attributes_equal(
-            jadecobra.aws_lambda,
+            src.jadecobra.aws_lambda,
             [
                 '__builtins__',
                 '__cached__',
@@ -27,7 +27,7 @@ class TestAwsLambda(jadecobra.toolkit.TestCase):
         account = "012345678901"
         name = "lambda_function_name"
         self.assertEqual(
-            jadecobra.aws_lambda.get_arn(
+            src.jadecobra.aws_lambda.get_arn(
                 region=region,
                 account=account,
                 name=name

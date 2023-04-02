@@ -1,6 +1,6 @@
 import argparse
-from . import deploy_lambda_function
-from . import deploy_lambda_layer
+from . import lambda_function
+from . import lambda_layer
 
 def main():
     parser = argparse.ArgumentParser(
@@ -25,7 +25,7 @@ def main():
     # Implement subparsers to replace if statements
     if args.deploy_function:
         print(f"\tCreating Package for {args.deploy_function}")
-        deploy_lambda_function.LambdaFunction(
+        lambda_function.LambdaFunction(
             args.deploy_function,
             bucket_name=args.bucket_name,
             profile_name=args.profile_name,
@@ -34,7 +34,7 @@ def main():
         print(
             f'\tCreating Lambda Layer for dependencies: {", ".join(args.publish_layer)}'
         )
-        deploy_lambda_layer.LambdaLayer(
+        lambda_layer.LambdaLayer(
             args.publish_layer,
             bucket_name=args.bucket_name,
             profile_name=args.profile_name,

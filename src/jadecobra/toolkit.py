@@ -3,7 +3,6 @@ import pathlib
 import time
 import os
 import json
-import re
 import shutil
 import subprocess
 import unittest
@@ -52,7 +51,6 @@ class TestCase(unittest.TestCase):
             shutil.rmtree('dist')
         except FileNotFoundError:
             'already removed'
-
 
     def build_and_publish(self):
         git_push()

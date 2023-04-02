@@ -1,3 +1,6 @@
+import re
+from . import toolkit
+
 def pyproject():
     return 'pyproject.toml'
 
@@ -17,11 +20,19 @@ def get_pyproject_version(text):
 def update_pyproject_version():
     text = get_pyproject()
     version, patch = get_pyproject_version(text)
-    write_file(
+    toolkit.write_file(
         filepath=pyproject(),
         data=re.sub(
             semantic_version_pattern(),
             f'version = "{version}{int(patch)+1}"',
             text
         )
+    )
+
+def update_version():
+    text = get_pyproject()
+    version, patch = get_pyproject_version(text)
+    toolkit.write_file(
+        filepath='src/jadecobra/__init__.py',
+        data=f"__version__ = {version}{int(patch)+1}",
     )
