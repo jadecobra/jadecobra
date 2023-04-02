@@ -208,7 +208,6 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
             ]
         )
 
-    @unittest.skip
     def test_update_version(self):
         import src.jadecobra as test
         self.assertEqual(
