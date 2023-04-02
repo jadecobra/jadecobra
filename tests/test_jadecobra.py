@@ -214,7 +214,7 @@ class TestJadeCobra(src.jadecobra.toolkit.TestCase):
             src.jadecobra.versioning.get_pyproject_version(
                 src.jadecobra.versioning.get_pyproject()
             ),
-            ('0.2.', '5'),
+            ('0.2.', '6'),
         )
 
     def test_published_version_is_test_version(self):
