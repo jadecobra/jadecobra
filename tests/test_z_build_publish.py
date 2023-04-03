@@ -33,20 +33,22 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
 
     def test_z_published_version_is_test_version(self):
         if src.jadecobra.toolkit.git_diff():
-            self.assert_published_version_is_source_version()
             try:
-                self.assertEqual(
-                    src.jadecobra.toolkit.publish(True),
-                    0
-                )
+                self.assert_published_version_is_source_version()
             except AssertionError:
                 try:
-                    self.version.update()
-                except FileNotFoundError:
-                    pass
-                finally:
-                    self.assertIsNone(
-                        src.jadecobra.toolkit.publish(True)
+                    self.assertEqual(
+                        src.jadecobra.toolkit.publish(True),
+                        0
                     )
-                    self.get_latest_published_version()
-                    self.assert_published_version_is_source_version()
+                except AssertionError:
+                    try:
+                        self.version.update()
+                    except FileNotFoundError:
+                        pass
+                    finally:
+                        self.assertIsNone(
+                            src.jadecobra.toolkit.publish(True)
+                        )
+                        self.get_latest_published_version()
+                        self.assert_published_version_is_source_version()
