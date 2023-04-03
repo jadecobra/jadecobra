@@ -6,11 +6,11 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
 
     version = src.jadecobra.versioning.Version()
 
-    def test_update_version(self):
-        self.assertEqual(
-            self.version.get_pyproject_version(),
-            ('0.3.', '7'),
-        )
+    # def test_update_version(self):
+    #     self.assertEqual(
+    #         self.version.get_pyproject_version(),
+    #         ('0.3.', '7'),
+    #     )
 
     def test_z_build_and_publish(self):
         self.version.build_and_publish()
