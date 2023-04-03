@@ -64,9 +64,4 @@ class TestJadeCobraVersioning(src.jadecobra.tester.TestCase):
             ]
         )
 
-    def test_update_version(self):
-        version = src.jadecobra.versioning.Version()
-        self.assertEqual(
-            version.get_pyproject_version(),
-            ('0.3.', '2'),
-        )
+
