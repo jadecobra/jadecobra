@@ -86,9 +86,10 @@ def git_diff():
     return run_in_shell('git diff').stdout.decode()
 
 def publish(distribute=False):
-    if git_diff():
+    commit_message = get_commit_message()
+    if git_diff() and commit_message:
         for command in (
-            f'commit -am "{get_commit_message()}"',
+            f'commit -am "{commit_message}"',
             'pull',
             'push',
         ):
