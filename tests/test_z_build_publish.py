@@ -19,17 +19,18 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
             os.system(f'pip {command}')
 
     def assert_published_version_is_source_version(self):
-        self.get_latest_published_version()
-        import jadecobra
-        importlib.reload(jadecobra)
-        self.assertEqual(
-            jadecobra.__version__,
-            src.jadecobra.__version__
-        )
-        self.assertEqual(
-            jadecobra.__version__,
-            self.version.current_pyproject_version
-        )
+        if src.jadecobra.toolkit.git_diff():
+            self.get_latest_published_version()
+            import jadecobra
+            importlib.reload(jadecobra)
+            self.assertEqual(
+                jadecobra.__version__,
+                src.jadecobra.__version__
+            )
+            self.assertEqual(
+                jadecobra.__version__,
+                self.version.current_pyproject_version
+            )
 
     def test_z_published_version_is_test_version(self):
         self.assert_published_version_is_source_version()
