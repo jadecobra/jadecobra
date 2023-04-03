@@ -82,8 +82,11 @@ def run_in_shell(command):
     print(result.stdout.decode())
     return result
 
+def git_diff():
+    return run_in_shell('git diff').stdout.decode()
+
 def publish(distribute=False):
-    if run_in_shell('git diff').stdout.decode():
+    if git_diff():
         for command in (
             f'commit -am "{get_commit_message()}"',
             'pull',
