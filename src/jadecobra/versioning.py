@@ -1,5 +1,5 @@
 import re
-import os
+import shutil
 
 from . import toolkit
 
@@ -49,22 +49,15 @@ class Version(object):
             data=f'__version__ = "{self.new_version}"',
         )
 
-    def git_push(self):
-        '''Update version for project and push upstream'''
+    @staticmethod
+    def remove_dist():
+        '''Remove Dist folder for new distribution'''
         try:
-            self.update_pyproject_version()
-            self.update_module_version()
+            shutil.rmtree('dist')
         except FileNotFoundError:
-            pass
-        finally:
-            os.system(f'git commit -am "{toolkit.get_commit_message()}"')
-            os.system('git push')
+            'already removed'
 
-    def build_and_publish(self):
-        '''Build the python distribution and upload to pypi'''
-        self.git_push()
+    def update(self):
         self.remove_dist()
-        os.system('python3 -m build')
-        self.assertEqual(
-            os.system('python3 -m twine upload dist/*'), 0
-        )
+        self.update_pyproject_version()
+        self.update_module_version()

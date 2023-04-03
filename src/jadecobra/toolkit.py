@@ -1,9 +1,9 @@
 import datetime
 import json
 import pathlib
-import shutil
 import time
 import os
+import subprocess
 
 def logger(message, level="INFO"):
     print(f"[{level}] {message}")
@@ -70,17 +70,36 @@ def read_json(filepath):
     with open(f'{filepath}.template.json') as template:
         return json.load(template)
 
-def remove_dist():
-    '''Remove Dist folder for new distribution'''
-    try:
-        shutil.rmtree('dist')
-    except FileNotFoundError:
-        'already removed'
+def run_in_shell(command):
+    result = time_it(
+        command,
+        function=subprocess.run,
+        description=command,
+        shell=True,
+        capture_output=True,
+    )
+    print(result.stderr.decode())
+    print(result.stdout.decode())
+    return result
 
-def git_push():
-    for command in (
-        f'commit -am "{get_commit_message()}"',
-        'pull',
-        'push',
-    ):
-        os.system(f'git {command}')
+def git_push(commit_message):
+    if commit_message:
+        for command in (
+            f'commit -am "{commit_message}"',
+            'pull',
+            'push',
+        ):
+            run_in_shell(f'git {command}')
+
+def build_and_publish():
+    '''Build the python distribution and upload to pypi'''
+    delimiter()
+    commit_message = get_commit_message()
+    if commit_message:
+        git_push(commit_message)
+        for command in (
+            'build',
+            'twine upload dist/*',
+        ):
+            result = run_in_shell(f'python3 -m {command}')
+        return result.returncode

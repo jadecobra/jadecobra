@@ -2,6 +2,7 @@ import subprocess
 import unittest
 
 from . import toolkit
+from . import versioning
 
 
 class TestCase(unittest.TestCase):
@@ -10,20 +11,14 @@ class TestCase(unittest.TestCase):
 
     def create_cdk_templates(self):
         '''Create CloudFormation using CDK with presets'''
-        result = toolkit.time_it(
+        result = toolkit.run_in_shell(
             (
                 'cdk ls '
                 '--no-version-reporting '
                 '--no-path-metadata '
                 '--no-asset-metadata'
-            ),
-            function=subprocess.run,
-            description=f'cdk ls',
-            shell=True,
-            capture_output=True,
+            )
         )
-        print(result.stderr.decode())
-        print(result.stdout.decode())
         self.assertEqual(result.returncode, 0)
 
     def assert_cdk_templates_equal(self, stack_name):

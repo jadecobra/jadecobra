@@ -1,5 +1,6 @@
 import src.jadecobra.tester
 import src.jadecobra.versioning
+import os
 
 
 class TestJadeCobraVersioning(src.jadecobra.tester.TestCase):
@@ -17,8 +18,8 @@ class TestJadeCobraVersioning(src.jadecobra.tester.TestCase):
                 '__name__',
                 '__package__',
                 '__spec__',
-                'os',
                 're',
+                'shutil',
                 'toolkit',
             ]
         )
@@ -54,13 +55,13 @@ class TestJadeCobraVersioning(src.jadecobra.tester.TestCase):
                 '__str__',
                 '__subclasshook__',
                 '__weakref__',
-                'build_and_publish',
                 'get_pyproject_version',
-                'git_push',
                 'pyproject',
                 'read_pyproject',
+                'remove_dist',
                 'semantic_version_pattern',
+                'update',
                 'update_module_version',
-                'update_pyproject_version'
+                'update_pyproject_version',
             ]
         )

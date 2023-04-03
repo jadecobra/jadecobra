@@ -20,6 +20,7 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'subprocess',
                 'toolkit',
                 'unittest',
+                'versioning',
             ]
         )
 
