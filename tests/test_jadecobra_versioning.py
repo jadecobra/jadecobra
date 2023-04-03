@@ -54,6 +54,7 @@ class TestJadeCobraVersioning(src.jadecobra.tester.TestCase):
                 '__str__',
                 '__subclasshook__',
                 '__weakref__',
+                'build_and_publish',
                 'get_pyproject_version',
                 'git_push',
                 'pyproject',
@@ -63,5 +64,3 @@ class TestJadeCobraVersioning(src.jadecobra.tester.TestCase):
                 'update_pyproject_version'
             ]
         )
-
-

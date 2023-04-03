@@ -17,13 +17,9 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 '__name__',
                 '__package__',
                 '__spec__',
-                'json',
-                'os',
-                'shutil',
                 'subprocess',
                 'toolkit',
                 'unittest',
-                'versioning'
             ]
         )
 
@@ -120,7 +116,6 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'assert_',
                 'assert_attributes_equal',
                 'assert_cdk_templates_equal',
-                'build_and_publish',
                 'countTestCases',
                 'create_cdk_templates',
                 'debug',
@@ -141,8 +136,6 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'id',
                 'longMessage',
                 'maxDiff',
-                'read_json',
-                'remove_dist',
                 'run',
                 'setUp',
                 'setUpClass',

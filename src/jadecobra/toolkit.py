@@ -1,5 +1,7 @@
 import datetime
+import json
 import pathlib
+import shutil
 import time
 import os
 
@@ -18,22 +20,19 @@ def delete(filepath):
 def file_exists(filepath):
     return pathlib.Path(filepath).exists()
 
-def make_dir(filepath):
-    try:
-        os.makedirs(pathlib.Path(filepath).parent)
-    except FileExistsError:
-        pass
+def make_parent_directory(filepath):
+    return os.makedirs(pathlib.Path(filepath).parent, exist_ok=True)
 
 def write_config(filepath=None, parser=None):
     "Write Config Parameters to filepath"
-    make_dir(filepath)
+    make_parent_directory(filepath)
     with open(filepath, "w") as configfile:
         parser.write(configfile)
 
 def write_file(filepath=None, data=None):
     "Write Credentials to filepath"
     filepath = filepath.replace('\\', '/')
-    make_dir(filepath)
+    make_parent_directory(filepath)
     logger(f"Writing data to {filepath}")
     with open(filepath, "w") as writer:
         writer.write(str(data))
@@ -65,3 +64,23 @@ def to_camel_case(text):
 
 def get_commit_message():
     return input("Enter commit message: ")
+
+def read_json(filepath):
+    '''Return a dictionary from a json file'''
+    with open(f'{filepath}.template.json') as template:
+        return json.load(template)
+
+def remove_dist():
+    '''Remove Dist folder for new distribution'''
+    try:
+        shutil.rmtree('dist')
+    except FileNotFoundError:
+        'already removed'
+
+def git_push():
+    for command in (
+        f'commit -am "{get_commit_message()}"',
+        'pull',
+        'push',
+    ):
+        os.system(f'git {command}')
