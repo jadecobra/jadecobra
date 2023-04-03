@@ -91,10 +91,9 @@ def git_push(commit_message):
         ):
             run_in_shell(f'git {command}')
 
-def build_and_publish():
+def build_and_publish(commit_message):
     '''Build the python distribution and upload to pypi'''
     delimiter()
-    commit_message = get_commit_message()
     if commit_message:
         git_push(commit_message)
         for command in (
