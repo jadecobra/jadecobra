@@ -28,8 +28,7 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
                 )
             except AssertionError:
                 try:
-                    self.version.update_pyproject_version()
-                    self.version.update_module_version()
+                    self.version.update()
                 except FileNotFoundError:
                     pass
                 finally:
