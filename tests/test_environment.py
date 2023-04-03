@@ -2,7 +2,7 @@ import src.jadecobra.aws_environment
 import src.jadecobra.toolkit
 
 
-class TestAwsEnvironment(src.jadecobra.toolkit.TestCase):
+class TestAwsEnvironment(src.jadecobra.tester.TestCase):
 
     def test_environment_attributes(self):
         self.assert_attributes_equal(

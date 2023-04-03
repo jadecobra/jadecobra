@@ -2,7 +2,7 @@ import src.jadecobra.aws_lambda
 import src.jadecobra.toolkit
 
 
-class TestAwsLambda(src.jadecobra.toolkit.TestCase):
+class TestAwsLambda(src.jadecobra.tester.TestCase):
 
     def test_aws_lambda(self):
         self.assert_attributes_equal(

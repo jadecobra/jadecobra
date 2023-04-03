@@ -1,7 +1,7 @@
 import src.jadecobra.aws_lambda.deploy.lambda_layer
 import src.jadecobra.toolkit
 
-class TestAwsDeployLambdaLayer(src.jadecobra.toolkit.TestCase):
+class TestAwsDeployLambdaLayer(src.jadecobra.tester.TestCase):
 
     def test_deploy_lambda_layer(self):
         # with self.assertRaises(FileNotFoundError):

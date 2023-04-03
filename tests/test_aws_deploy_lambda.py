@@ -1,7 +1,7 @@
 import src.jadecobra.aws_lambda.deploy.deploy_lambda
-import src.jadecobra.toolkit
+import src.jadecobra.tester
 
-class TestAwsLambdaTools(src.jadecobra.toolkit.TestCase):
+class TestAwsLambdaTools(src.jadecobra.tester.TestCase):
 
     def test_lambda_deployer(self):
         src.jadecobra.aws_lambda.deploy.deploy_lambda.LambdaDeployer()

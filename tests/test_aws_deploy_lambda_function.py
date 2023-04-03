@@ -1,7 +1,7 @@
 import src.jadecobra.aws_lambda.deploy.lambda_function
 import src.jadecobra.toolkit
 
-class TestAwsDeployLambdaFunction(src.jadecobra.toolkit.TestCase):
+class TestAwsDeployLambdaFunction(src.jadecobra.tester.TestCase):
 
     def test_deploy_lambda_function(self):
         with self.assertRaises(TypeError):
