@@ -44,9 +44,8 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
             except FileNotFoundError:
                 pass
             finally:
-                self.assertEqual(
-                    src.jadecobra.toolkit.publish(True),
-                    0
+                self.assertIsNone(
+                    src.jadecobra.toolkit.publish(True)
                 )
                 self.get_latest_published_version()
                 self.assert_published_version_is_source_version()
