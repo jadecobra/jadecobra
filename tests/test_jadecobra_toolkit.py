@@ -24,6 +24,7 @@ class TestJadeCobraToolkit(src.jadecobra.tester.TestCase):
                 'error',
                 'file_exists',
                 'get_commit_message',
+                'git_diff',
                 'header',
                 'json',
                 'log_performance',
