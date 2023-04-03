@@ -39,7 +39,7 @@ def update_module_version():
     version, patch = get_pyproject_version(text)
     toolkit.write_file(
         filepath='src/jadecobra/__init__.py',
-        data=f"__version__ = {version}{int(patch)+1}",
+        data=f'__version__ = "{version}{int(patch)+1}"',
     )
 
 def git_push():

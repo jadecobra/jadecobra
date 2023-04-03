@@ -1,17 +1,8 @@
 import src.jadecobra
 import src.jadecobra.tester
-import src.jadecobra.toolkit
-import src.jadecobra.versioning
-import os
 
 
-class TestJadeCobra(src.jadecobra.tester.TestCase):
-
-    def test_jadecobra(self):
-        self.assert_attributes_equal(
-            src.jadecobra,
-            []
-        )
+class TestJadeCobraTester(src.jadecobra.tester.TestCase):
 
     def test_tester_attributes(self):
         self.assert_attributes_equal(
@@ -161,83 +152,4 @@ class TestJadeCobra(src.jadecobra.tester.TestCase):
                 'tearDown',
                 'tearDownClass'
             ]
-        )
-
-    def test_toolkit(self):
-        self.assert_attributes_equal(
-            src.jadecobra.toolkit,
-            [
-                '__builtins__',
-                '__cached__',
-                '__doc__',
-                '__file__',
-                '__loader__',
-                '__name__',
-                '__package__',
-                '__spec__',
-                'datetime',
-                'delete',
-                'delimiter',
-                'error',
-                'file_exists',
-                'get_commit_message',
-                'header',
-                'log_performance',
-                'logger',
-                'make_dir',
-                'os',
-                'pathlib',
-                'time',
-                'time_it',
-                'to_camel_case',
-                'write_config',
-                'write_file'
-            ]
-        )
-
-    def test_to_camel_case(self):
-        self.assertEqual(
-            src.jadecobra.toolkit.to_camel_case('abc-def-hij'),
-            'AbcDefHij'
-        )
-
-    def test_versioning(self):
-        self.assert_attributes_equal(
-            src.jadecobra.versioning,
-            [
-                '__builtins__',
-                '__cached__',
-                '__doc__',
-                '__file__',
-                '__loader__',
-                '__name__',
-                '__package__',
-                '__spec__',
-                'get_pyproject_version',
-                'git_push',
-                'os',
-                'pyproject',
-                're',
-                'read_pyproject',
-                'semantic_version_pattern',
-                'toolkit',
-                'update_module_version',
-                'update_pyproject_version',
-            ]
-        )
-
-    def test_update_version(self):
-        self.assertEqual(
-            src.jadecobra.versioning.get_pyproject_version(
-                src.jadecobra.versioning.read_pyproject()
-            ),
-            ('0.2.', '7'),
-        )
-
-    def test_published_version_is_test_version(self):
-        os.system('pip install jadecobra')
-        import jadecobra
-        self.assertEqual(
-            jadecobra.__version__,
-            src.jadecobra.__version__
         )
