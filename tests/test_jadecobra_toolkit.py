@@ -1,8 +1,7 @@
 import src.jadecobra
 import src.jadecobra.tester
 import src.jadecobra.toolkit
-import jadecobra.versioning
-import os
+import src.jadecobra.versioning
 
 
 class TestJadeCobraToolkit(src.jadecobra.tester.TestCase):
