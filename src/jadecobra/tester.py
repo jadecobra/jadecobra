@@ -59,7 +59,7 @@ class TestCase(unittest.TestCase):
 
     def build_and_publish(self):
         '''Build the python distribution and upload to pypi'''
-        versioning.git_push()
+        versioning.Version().git_push()
         self.remove_dist()
         os.system('python3 -m build')
         self.assertEqual(

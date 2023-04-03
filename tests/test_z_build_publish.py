@@ -13,3 +13,5 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
             jadecobra.__version__,
             src.jadecobra.__version__
         )
+        os.remove('bob_function.zip')
+        os.remove('bob_layer.zip')

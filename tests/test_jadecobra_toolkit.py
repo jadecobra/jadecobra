@@ -1,7 +1,7 @@
 import src.jadecobra
 import src.jadecobra.tester
 import src.jadecobra.toolkit
-import src.jadecobra.versioning
+import jadecobra.versioning
 import os
 
 
