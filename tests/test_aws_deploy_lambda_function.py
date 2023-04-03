@@ -1,5 +1,6 @@
 import src.jadecobra.aws_lambda.deploy.lambda_function
 import src.jadecobra.toolkit
+import os
 
 class TestAwsDeployLambdaFunction(src.jadecobra.tester.TestCase):
 
@@ -8,6 +9,7 @@ class TestAwsDeployLambdaFunction(src.jadecobra.tester.TestCase):
             src.jadecobra.aws_lambda.deploy.lambda_function.LambdaFunction(
                 function_name='bob_function'
             )
+            os.remove('bob_function.zip')
 
     def test_deploy_lambda_function_attributes(self):
         self.assert_attributes_equal(

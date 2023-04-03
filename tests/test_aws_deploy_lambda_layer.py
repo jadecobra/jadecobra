@@ -1,5 +1,6 @@
 import src.jadecobra.aws_lambda.deploy.lambda_layer
 import src.jadecobra.toolkit
+import os
 
 class TestAwsDeployLambdaLayer(src.jadecobra.tester.TestCase):
 
@@ -8,6 +9,7 @@ class TestAwsDeployLambdaLayer(src.jadecobra.tester.TestCase):
             src.jadecobra.aws_lambda.deploy.lambda_layer.LambdaLayer(
                 dependencies=['bob_layer']
             )
+            os.remove('bob_layer.zip')
 
     def test_deploy_lambda_layer_attributes(self):
         self.assert_attributes_equal(
