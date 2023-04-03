@@ -82,23 +82,18 @@ def run_in_shell(command):
     print(result.stdout.decode())
     return result
 
-def git_push(commit_message):
-    if commit_message:
+def publish(distribute=False):
+    if run_in_shell('git diff').stdout.decode():
         for command in (
-            f'commit -am "{commit_message}"',
+            f'commit -am "{get_commit_message()}"',
             'pull',
             'push',
         ):
             run_in_shell(f'git {command}')
-
-def build_and_publish(commit_message):
-    '''Build the python distribution and upload to pypi'''
-    delimiter()
-    if commit_message:
-        git_push(commit_message)
-        for command in (
-            'build',
-            'twine upload dist/*',
-        ):
-            result = run_in_shell(f'python3 -m {command}')
-        return result.returncode
+        if distribute:
+            for command in (
+                'build',
+                'twine upload dist/*',
+            ):
+                result = run_in_shell(f'python3 -m {command}')
+            return result.returncode
