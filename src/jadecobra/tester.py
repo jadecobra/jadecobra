@@ -88,7 +88,7 @@ def create_tdd_project(project_name):
 def get_project_name(project_name):
     return os.path.split(os.getcwd())[-1]
 
-def create_tdd_cdk_project(project_name):
+def create_tdd_cdk_project(project_name=None):
     if not project_name:
         project_name = get_project_name(project_name)
     create_scaffolding()
