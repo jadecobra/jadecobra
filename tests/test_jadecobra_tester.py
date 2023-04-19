@@ -159,4 +159,9 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
         return
 
     def test_create_tdd_cdk_project(self):
+        project_name = 'project_name'
+        self.assertEqual(
+            src.jadecobra.tester.create_tdd_cdk_project(project_name),
+            ''''''
+        )
         self.assertFalse(True)
