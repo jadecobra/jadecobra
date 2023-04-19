@@ -32,7 +32,7 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         )
 
     def test_z_published_version_is_test_version(self):
-        if src.jadecobra.toolkit.git_diff():
+        # if src.jadecobra.toolkit.git_diff():
             try:
                 self.version.update()
             except FileNotFoundError:
