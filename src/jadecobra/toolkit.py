@@ -30,7 +30,6 @@ def write_config(filepath=None, parser=None):
         parser.write(configfile)
 
 def write_file(filepath=None, data=None):
-    "Write Credentials to filepath"
     filepath = filepath.replace('\\', '/')
     make_parent_directory(filepath)
     logger(f"Writing data to {filepath}")

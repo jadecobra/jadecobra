@@ -4,4 +4,7 @@ twine
 wheel
 build
 boto3
-jadecobra
+jadecobrajadecobra
+macfseventsjadecobra
+macfseventsjadecobra
+macfsevents

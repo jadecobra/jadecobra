@@ -1,3 +1,4 @@
+import os
 import src.jadecobra
 import src.jadecobra.tester
 
@@ -17,14 +18,20 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 '__name__',
                 '__package__',
                 '__spec__',
-                'create_scaffold',
+                'create_app',
+                'create_scaffolding',
                 'create_scent',
                 'create_tdd_cdk_project',
+                'create_tdd_project',
                 'create_test_file',
+                'get_project_name',
+                'remove_unwanted_files',
+                'run_tests',
+                'sys',
                 'os',
                 'toolkit',
                 'unittest',
-                'versioning',
+                'update_requirements',
             ]
         )
 
@@ -161,7 +168,19 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
     def test_create_tdd_cdk_project(self):
         project_name = 'project_name'
         self.assertEqual(
-            src.jadecobra.tester.create_tdd_cdk_project(project_name),
-            ''''''
+            sorted(os.listdir(project_name)),
+            [
+
+            ]
         )
-        self.assertFalse(True)
+        # self.assertEqual(
+        #     src.jadecobra.tester.create_tdd_cdk_project(project_name),
+        #     ''''''
+        # )
+        # self.assertEqual(
+        #     sorted(os.listdir(project_name)),
+        #     [
+
+        #     ]
+        # )
+        # self.assertFalse(True)

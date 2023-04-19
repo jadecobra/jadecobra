@@ -1,1 +1,6 @@
-__version__ = '0.3.14'
+import jadecobra.tester
+
+class Testproject_name(jadecobra.tester.TestCase):
+
+    def test_failure(self):
+        self.assertFalse(False)

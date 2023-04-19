@@ -1,33 +1,51 @@
 import unittest
 import os
+import sys
 
 from . import toolkit
-from . import versioning
 
-
-def create_scaffold():
-    return os.system(
+def create_scaffolding():
+    for command in (
         'npm install -g npm aws-cdk',
         'cdk init app --language python',
-        'python -m venv .venv',
-        '.venv/scripts/activate',
         'python -m pip install -U pip',
         'python -m pip install -r requirements.txt',
-    )
+    ):
+        os.system(command)
+
+def remove_unwanted_files(project_name):
+    os.remove('requirements-dev.txt')
+    os.rmdir('tests/unit')
+    os.rmdir(project_name)
+
+def run_tests():
+    os.system('sniffer')
+
+def update_requirements():
+    with open('requirements.txt', 'a') as file:
+        file.write('jadecobra\n')
+        if sys.platform.startswith('linux'):
+            file.write('pyinotify')
+        elif sys.platform.startswith('win32'):
+            file.write('pywin32')
+        elif sys.platform.startswith('darwin'):
+            file.write('macfsevents')
 
 def create_test_file(project_name):
-    with open('tests/__init__.py') as file:
-        file.write(f'''import jadecobra.toolkit
+    toolkit.write_file(
+        filepath='tests/__init__.py',
+        data=f'''import jadecobra.tester
 
-class Test{project_name}(jadecobra.toolkit.TestCase):
+class Test{project_name}(jadecobra.tester.TestCase):
 
     def test_failure(self):
         self.assertFalse(True)'''
-        )
+    )
 
 def create_scent():
-    with open('scent.py') as file:
-        file.write("""import sniffer.api
+    toolkit.write_file(
+        filepath='scent.py',
+        data="""import sniffer.api
 import subprocess
 watch_paths = ['tests/', 'src/']
 
@@ -37,17 +55,49 @@ def run_tests(*args):
         'python -m unittest -f tests/*.*',
         shell=True
     ).returncode == 0:
-        return True""")
+        return True"""
+    )
 
+def create_app(project_name):
+    toolkit.write_file(
+        filepath='app.py',
+        data=f'''import aws_cdk
+import jadecobra.toolkit
+import os
+import {project_name}
+
+app = aws_cdk.App()
+{project_name}.Stack(
+    app, {project_name},
+    env=aws_cdk.Environment(
+        account=os.getenv('CDK_DEFAULT_ACCOUNT'),
+        region=os.getenv('CDK_DEFAULT_REGION')
+    ),
+)
+
+jadecobra.toolkit.time_it(
+    function=app.synth,
+    description='cdk ls for {project_name}'
+)
+        '''
+    )
+
+def create_tdd_project(project_name):
+    return
+
+def get_project_name(project_name):
+    return os.path.split(os.getcwd())[-1]
 
 def create_tdd_cdk_project(project_name):
-    os.makedirs(project_name, exist_ok=True)
-    os.chdir(project_name)
-    create_scaffold()
-    os.remove('requirements-dev.txt')
+    if not project_name:
+        project_name = get_project_name(project_name)
+    create_scaffolding()
+    update_requirements()
+    create_app(project_name)
     create_test_file(project_name)
     create_scent()
-    os.system('sniffer')
+    remove_unwanted_files(project_name)
+    run_tests()
 
 
 class TestCase(unittest.TestCase):
