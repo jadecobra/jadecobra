@@ -151,3 +151,12 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'tearDownClass'
             ]
         )
+
+    def test_create_scaffold(self):
+        return
+
+    def test_create_test_file(self):
+        return
+
+    def test_create_tdd_cdk_project(self):
+        self.assertFalse(True)
