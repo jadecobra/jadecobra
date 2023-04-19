@@ -5,10 +5,8 @@ from . import toolkit
 from . import versioning
 
 
-def create_tdd_cdk_project(project_name):
-    os.makedirs(project_name, exist_ok=True)
-    os.chdir(project_name)
-    os.system(
+def create_scaffold():
+    return os.system(
         'npm install -g npm aws-cdk',
         'cdk init app --language python',
         'python -m venv .venv',
@@ -16,14 +14,40 @@ def create_tdd_cdk_project(project_name):
         'python -m pip install -U pip',
         'python -m pip install -r requirements.txt',
     )
-    os.remove('requirements-dev.txt')
+
+def create_test_file(project_name):
     with open('tests/__init__.py') as file:
         file.write(f'''import jadecobra.toolkit
 
 class Test{project_name}(jadecobra.toolkit.TestCase):
 
     def test_failure(self):
-        self.assertFalse(True)''')
+        self.assertFalse(True)'''
+        )
+
+def create_scent():
+    with open('scent.py') as file:
+        file.write("""import sniffer.api
+import subprocess
+watch_paths = ['tests/', 'src/']
+
+@sniffer.api.runnable
+def run_tests(*args):
+    if subprocess.run(
+        'python -m unittest -f tests/*.*',
+        shell=True
+    ).returncode == 0:
+        return True""")
+
+
+def create_tdd_cdk_project(project_name):
+    os.makedirs(project_name, exist_ok=True)
+    os.chdir(project_name)
+    create_scaffold()
+    os.remove('requirements-dev.txt')
+    create_test_file(project_name)
+    create_scent()
+    os.system('sniffer')
 
 
 class TestCase(unittest.TestCase):
