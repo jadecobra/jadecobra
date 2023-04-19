@@ -1,8 +1,29 @@
-import subprocess
 import unittest
+import os
 
 from . import toolkit
 from . import versioning
+
+
+def create_tdd_cdk_project(project_name):
+    os.makedirs(project_name, exist_ok=True)
+    os.chdir(project_name)
+    os.system(
+        'npm install -g npm aws-cdk',
+        'cdk init app --language python',
+        'python -m venv .venv',
+        '.venv/scripts/activate',
+        'python -m pip install -U pip',
+        'python -m pip install -r requirements.txt',
+    )
+    os.remove('requirements-dev.txt')
+    with open('tests/__init__.py') as file:
+        file.write(f'''import jadecobra.toolkit
+
+class Test{project_name}(jadecobra.toolkit.TestCase):
+
+    def test_failure(self):
+        self.assertFalse(True)''')
 
 
 class TestCase(unittest.TestCase):
