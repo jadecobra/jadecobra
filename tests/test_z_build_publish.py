@@ -32,10 +32,6 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         )
 
     def test_z_published_version_is_test_version(self):
-        # try:
-        #     self.version.update()
-        # except FileNotFoundError:
-        #     pass
         try:
             self.assert_published_version_is_source_version()
         except AssertionError:
@@ -48,5 +44,4 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
                 self.assertIsNone(
                     src.jadecobra.toolkit.publish(True)
                 )
-                self.get_latest_published_version()
                 self.assert_published_version_is_source_version()
