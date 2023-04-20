@@ -31,13 +31,17 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         )
 
     def test_z_published_version_is_test_version(self):
-        self.assertFalse(True)
+        # if error publishing
+        # update version
+        # publish
         try:
             self.assertEqual(
                 src.jadecobra.toolkit.publish(True),
                 0
             )
         except AssertionError:
+            self.assertFalse(True)
+            src.jadecobra.versioning.Version().update()
             self.assertIsNone(
                 src.jadecobra.toolkit.publish(True)
             )
