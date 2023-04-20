@@ -31,9 +31,6 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         )
 
     def test_z_published_version_is_test_version(self):
-        # try:
-        #     self.assert_published_version_is_source_version()
-        # except AssertionError:
         try:
             self.assertEqual(
                 src.jadecobra.toolkit.publish(True),
