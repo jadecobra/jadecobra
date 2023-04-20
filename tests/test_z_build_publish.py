@@ -4,22 +4,21 @@ import src.jadecobra.versioning
 import src.jadecobra.toolkit
 import os
 
+def get_latest_published_version():
+    library = 'jadecobra'
+    print(f'installing latest version of {library}...')
+    for command in (
+        f'uninstall {library} -y',
+        f'install {library}',
+    ):
+        os.system(f'pip {command}')
+
 class TestZBuildDeploy(src.jadecobra.tester.TestCase):
 
     version = src.jadecobra.versioning.Version()
 
-    @staticmethod
-    def get_latest_published_version():
-        library = 'jadecobra'
-        print(f'installing latest version of {library}...')
-        for command in (
-            f'uninstall {library} -y',
-            f'install {library}',
-        ):
-            os.system(f'pip {command}')
-
     def assert_published_version_is_source_version(self):
-        self.get_latest_published_version()
+        get_latest_published_version()
         import jadecobra
         importlib.reload(jadecobra)
         self.assertEqual(
@@ -32,16 +31,16 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         )
 
     def test_z_published_version_is_test_version(self):
+        # try:
+        #     self.assert_published_version_is_source_version()
+        # except AssertionError:
         try:
-            self.assert_published_version_is_source_version()
+            self.assertEqual(
+                src.jadecobra.toolkit.publish(True),
+                0
+            )
         except AssertionError:
-            try:
-                self.assertEqual(
-                    src.jadecobra.toolkit.publish(True),
-                    0
-                )
-            except AssertionError:
-                self.assertIsNone(
-                    src.jadecobra.toolkit.publish(True)
-                )
-                self.assert_published_version_is_source_version()
+            self.assertIsNone(
+                src.jadecobra.toolkit.publish(True)
+            )
+            self.assert_published_version_is_source_version()
