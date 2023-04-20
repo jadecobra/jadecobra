@@ -94,20 +94,28 @@ def get_latest_published_version():
     ):
         os.system(f'pip {command}')
 
+def git_commit():
+    result = None
+    commit_message = get_commit_message()
+    if commit_message:
+        for command in (
+            f'commit -am "{commit_message}"',
+            'pull',
+            'push',
+        ):
+            result = run_in_shell(f'git {command}')
+        return result
+
+def package(distribute=False):
+    if distribute:
+        for command in (
+            'build',
+            'twine upload dist/*',
+        ):
+            result = run_in_shell(f'python3 -m {command}')
+
 def publish(distribute=False):
     if git_diff():
-        commit_message = get_commit_message()
-        if commit_message:
-            for command in (
-                f'commit -am "{commit_message}"',
-                'pull',
-                'push',
-            ):
-                result = run_in_shell(f'git {command}')
-            if distribute:
-                for command in (
-                    'build',
-                    'twine upload dist/*',
-                ):
-                    result = run_in_shell(f'python3 -m {command}')
-            return result
+        result = git_commit()
+        package(distribute)
+        return result
