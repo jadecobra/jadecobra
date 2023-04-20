@@ -84,6 +84,15 @@ def run_in_shell(command):
 def git_diff():
     return run_in_shell('git diff').stdout.decode()
 
+def get_latest_published_version():
+    library = 'jadecobra'
+    print(f'installing latest version of {library}...')
+    for command in (
+        f'uninstall {library} -y',
+        f'install {library}',
+    ):
+        os.system(f'pip {command}')
+
 def publish(distribute=False):
     commit_message = get_commit_message()
     if git_diff() and commit_message:

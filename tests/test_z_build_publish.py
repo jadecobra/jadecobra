@@ -2,23 +2,14 @@ import importlib
 import src.jadecobra.tester
 import src.jadecobra.versioning
 import src.jadecobra.toolkit
-import os
 
-def get_latest_published_version():
-    library = 'jadecobra'
-    print(f'installing latest version of {library}...')
-    for command in (
-        f'uninstall {library} -y',
-        f'install {library}',
-    ):
-        os.system(f'pip {command}')
 
 class TestZBuildDeploy(src.jadecobra.tester.TestCase):
 
     version = src.jadecobra.versioning.Version()
 
     def assert_published_version_is_source_version(self):
-        get_latest_published_version()
+        src.jadecobra.toolkit.get_latest_published_version()
         import jadecobra
         importlib.reload(jadecobra)
         self.assertEqual(
