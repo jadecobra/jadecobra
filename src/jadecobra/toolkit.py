@@ -5,8 +5,6 @@ import time
 import os
 import subprocess
 
-from . import versioning
-
 def logger(message, level="INFO"):
     print(f"[{level}] {message}")
 
