@@ -27,7 +27,7 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         # publish
         # self.assertFalse(True)
         result = src.jadecobra.toolkit.publish(True)
-        if result and 'ERROR' in result:
+        if result and 'ERROR' in result.stderror.decode():
             self.assertFalse(True)
             src.jadecobra.versioning.Version().update()
             src.jadecobra.publish(True)
