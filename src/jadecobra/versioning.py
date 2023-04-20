@@ -7,7 +7,8 @@ from . import __version__
 
 class Version(object):
 
-    def __init__(self):
+    def __init__(self, library:string=None):
+        self.library = library
         self.text = self.read_pyproject()
         self.current_pyproject_version, self.version, self.patch = self.get_pyproject_version()
         self.new_version = f"{self.version}{int(self.patch)+1}"
@@ -37,7 +38,6 @@ class Version(object):
         ).group(1, 2, 3)
 
     def update_pyproject_version(self):
-        raise Exception
         '''Update version in pyproject.toml'''
         toolkit.write_file(
             filepath=self.pyproject(),
@@ -50,9 +50,8 @@ class Version(object):
 
     def update_module_version(self):
         '''Update Module Version'''
-        raise Exception
         toolkit.write_file(
-            filepath='src/jadecobra/__init__.py',
+            filepath=f'src/{self.library}/__init__.py',
             data=f'__version__ = "{self.new_version}"',
         )
 
@@ -65,7 +64,6 @@ class Version(object):
             'already removed'
 
     def update(self):
-        raise Exception
         print(f'updating version to {self.new_version}...')
         self.remove_dist()
         self.update_pyproject_version()

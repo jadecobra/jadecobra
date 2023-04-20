@@ -22,14 +22,20 @@ def run_tests():
     os.system('sniffer')
 
 def update_requirements():
+    requirements = [
+        'jadecobra',
+    ]
+    if sys.platform.startswith('linux'):
+        requirements.append('pyinotify')
+    elif sys.platform.startswith('win32'):
+        requirements.append('pywin32')
+    elif sys.platform.startswith('darwin'):
+        requirements.append('macfsevents')
+    with open('requirements.txt') as file:
+        requirements.append((line.strip() for line in file))
     with open('requirements.txt', 'a') as file:
-        file.write('jadecobra\n')
-        if sys.platform.startswith('linux'):
-            file.write('pyinotify')
-        elif sys.platform.startswith('win32'):
-            file.write('pywin32')
-        elif sys.platform.startswith('darwin'):
-            file.write('macfsevents')
+        for requirement in set(requirements):
+            file.write(requirement)
 
 def create_test_file(project_name):
     toolkit.write_file(
