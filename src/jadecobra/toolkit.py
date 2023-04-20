@@ -70,6 +70,7 @@ def read_json(filepath):
         return json.load(template)
 
 def run_in_shell(command):
+    print(f'running {command}...')
     result = time_it(
         command,
         function=subprocess.run,
