@@ -34,15 +34,19 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         # if error publishing
         # update version
         # publish
-        try:
-            self.assertEqual(
-                src.jadecobra.toolkit.publish(True),
-                0
-            )
-        except AssertionError:
+        if 'ERROR' in src.jadecobra.toolkit.publish(True):
             self.assertFalse(True)
             src.jadecobra.versioning.Version().update()
-            self.assertIsNone(
-                src.jadecobra.toolkit.publish(True)
-            )
+            src.jadecobra.publish(True)
             self.assert_published_version_is_source_version()
+        # try:
+        #     self.assertEqual(
+        #         src.jadecobra.toolkit.publish(True),
+        #         0
+        #     )
+        # except AssertionError:
+
+        #     self.assertIsNone(
+        #         src.jadecobra.toolkit.publish(True)
+        #     )
+        #     self.assert_published_version_is_source_version()

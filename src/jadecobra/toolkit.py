@@ -99,4 +99,4 @@ def publish(distribute=False):
                 'twine upload dist/*',
             ):
                 result = run_in_shell(f'python3 -m {command}')
-        return result.returncode
+        return result
