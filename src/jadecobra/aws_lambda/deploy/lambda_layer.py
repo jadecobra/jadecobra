@@ -5,13 +5,8 @@ from . import deploy_lambda
 
 
 class LambdaLayer(deploy_lambda.LambdaDeployer):
-
     def __init__(
-        self,
-        dependencies=None,
-        bucket_name=None,
-        profile_name="DEV",
-        name=None
+        self, dependencies=None, bucket_name=None, profile_name="DEV", name=None
     ):
         super().__init__(bucket_name=bucket_name, profile_name=profile_name)
         self.dependencies = dependencies
@@ -63,8 +58,11 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
     def install_dependencies(self):
         try:
             for dependency in self.dependencies:
+                # os.system(
+                #     f"pip install --target ./{self.directory()}/{self.runtime()} {dependency} --upgrade --platform linux_x86_64 --only-binary=:all: --platform linux_aarch64 --only-binary=:all:"
+                # )
                 os.system(
-                    f"pip install --target ./{self.directory()}/{self.runtime()} {dependency} --upgrade --platform linux_x86_64 --only-binary=:all: --platform linux_aarch64 --only-binary=:all:"
+                    f"pip install --target ./{self.directory()}/{self.runtime()} --upgrade --platform linux_x86_64 --only-binary=:all: {dependency}"
                 )
         except TypeError:
             print("No dependencies to install")
@@ -75,7 +73,8 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
         os.system("python -m pip install -U pip")
         self.install_dependencies()
         shutil.make_archive(
-            self.name, "zip",
+            self.name,
+            "zip",
             root_dir=self.directory(),
             # base_dir=self.runtime()
         )
