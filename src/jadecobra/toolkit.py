@@ -5,6 +5,8 @@ import time
 import os
 import subprocess
 
+from . import versioning
+
 def logger(message, level="INFO"):
     print(f"[{level}] {message}")
 
@@ -107,15 +109,17 @@ def git_commit():
         return result
 
 def package(distribute=False):
+    versioning.Version().update()
     if distribute:
         for command in (
             'build',
             'twine upload dist/*',
         ):
             result = run_in_shell(f'python3 -m {command}')
+    return result
 
 def publish(distribute=False):
     if git_diff():
         result = git_commit()
-        package(distribute)
+        result = package(distribute)
         return result

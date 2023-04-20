@@ -42,6 +42,7 @@ class TestJadeCobraToolkit(src.jadecobra.tester.TestCase):
                 'time',
                 'time_it',
                 'to_camel_case',
+                'versioning',
                 'write_config',
                 'write_file'
             ]
