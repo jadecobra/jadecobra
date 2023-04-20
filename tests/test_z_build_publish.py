@@ -28,18 +28,8 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         # self.assertFalse(True)
         result = src.jadecobra.toolkit.publish(True)
         if result and 'ERROR' in result:
+            self.assertFalse(True)
             src.jadecobra.versioning.Version().update()
             src.jadecobra.publish(True)
             self.assert_published_version_is_source_version()
-        self.assertFalse(True)
-        # try:
-        #     self.assertEqual(
-        #         src.jadecobra.toolkit.publish(True),
-        #         0
-        #     )
-        # except AssertionError:
-
-        #     self.assertIsNone(
-        #         src.jadecobra.toolkit.publish(True)
-        #     )
-        #     self.assert_published_version_is_source_version()
+        # self.assertFalse(True)
