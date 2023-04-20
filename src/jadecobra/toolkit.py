@@ -92,11 +92,11 @@ def publish(distribute=False):
             'pull',
             'push',
         ):
-            run_in_shell(f'git {command}')
+            result = run_in_shell(f'git {command}')
         if distribute:
             for command in (
                 'build',
                 'twine upload dist/*',
             ):
                 result = run_in_shell(f'python3 -m {command}')
-            return result.returncode
+        return result.returncode
