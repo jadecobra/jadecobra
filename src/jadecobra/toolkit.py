@@ -109,7 +109,6 @@ def git_commit():
         return result
 
 def package(distribute=False):
-    versioning.Version().update()
     if distribute:
         for command in (
             'build',
