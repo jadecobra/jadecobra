@@ -85,8 +85,7 @@ def run_in_shell(command):
 def git_diff():
     return run_in_shell('git diff').stdout.decode()
 
-def get_latest_published_version():
-    library = 'jadecobra'
+def get_latest_published_version(library):
     print(f'installing latest version of {library}...')
     for command in (
         f'uninstall {library} -y',

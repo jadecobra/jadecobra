@@ -6,10 +6,11 @@ import src.jadecobra.toolkit
 
 class TestZBuildDeploy(src.jadecobra.tester.TestCase):
 
-    version = src.jadecobra.versioning.Version()
+    library = 'jadecobra'
+    version = src.jadecobra.versioning.Version(library)
 
     def assert_published_version_is_source_version(self):
-        src.jadecobra.toolkit.get_latest_published_version()
+        src.jadecobra.toolkit.get_latest_published_version(self.library)
         import jadecobra
         importlib.reload(jadecobra)
         self.assertEqual(
@@ -24,6 +25,6 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
     def test_z_published_version_is_test_version(self):
         result = src.jadecobra.toolkit.publish(True)
         if result and 'ERROR' in result.stdout.decode():
-            src.jadecobra.versioning.Version('jadecobra').update()
+            self.version.update()
             src.jadecobra.publish(True)
         self.assert_published_version_is_source_version()
