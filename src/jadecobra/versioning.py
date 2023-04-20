@@ -7,7 +7,7 @@ from . import __version__
 
 class Version(object):
 
-    def __init__(self, library:string=None):
+    def __init__(self, library:str=None):
         self.library = library
         self.text = self.read_pyproject()
         self.current_pyproject_version, self.version, self.patch = self.get_pyproject_version()
