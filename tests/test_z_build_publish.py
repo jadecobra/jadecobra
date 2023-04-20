@@ -25,8 +25,8 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
         # if error publishing
         # update version
         # publish
+        self.assertFalse(True)
         if 'ERROR' in src.jadecobra.toolkit.publish(True):
-            self.assertFalse(True)
             src.jadecobra.versioning.Version().update()
             src.jadecobra.publish(True)
             self.assert_published_version_is_source_version()
