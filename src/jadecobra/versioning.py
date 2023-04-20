@@ -63,8 +63,8 @@ class Version(object):
             'already removed'
 
     def update(self):
-        if toolkit.git_diff():
-            print(f'updating version to {self.new_version}...')
-            self.remove_dist()
-            self.update_pyproject_version()
-            self.update_module_version()
+        # if toolkit.git_diff():
+        print(f'updating version to {self.new_version}...')
+        self.remove_dist()
+        self.update_pyproject_version()
+        self.update_module_version()
