@@ -29,7 +29,3 @@ class TestZBuildDeploy(src.jadecobra.tester.TestCase):
             # self.assert_published_version_is_source_version()
         else:
             self.assert_published_version_is_source_version()
-            # self.assertEqual(
-            #     result,
-            #     {}
-            # )
