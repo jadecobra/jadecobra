@@ -37,6 +37,7 @@ class Version(object):
         ).group(1, 2, 3)
 
     def update_pyproject_version(self):
+        raise Exception
         '''Update version in pyproject.toml'''
         toolkit.write_file(
             filepath=self.pyproject(),
@@ -49,6 +50,7 @@ class Version(object):
 
     def update_module_version(self):
         '''Update Module Version'''
+        raise Exception
         toolkit.write_file(
             filepath='src/jadecobra/__init__.py',
             data=f'__version__ = "{self.new_version}"',
