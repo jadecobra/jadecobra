@@ -62,7 +62,10 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
                 #     f"pip install --target ./{self.directory()}/{self.runtime()} {dependency} --upgrade --platform linux_x86_64 --only-binary=:all: --platform linux_aarch64 --only-binary=:all:"
                 # )
                 os.system(
-                    f"pip install --target ./{self.directory()}/{self.runtime()} --upgrade --platform linux_x86_64 --only-binary=:all: {dependency}"
+                    "pip install "
+                    f"--target ./{self.directory()}/{self.runtime()} "
+                    "--upgrade --platform manylinux2014_x86_64 --only-binary=:all: "
+                    f"--implementation cp {dependency}"
                 )
         except TypeError:
             print("No dependencies to install")
