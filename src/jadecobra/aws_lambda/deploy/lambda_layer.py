@@ -64,7 +64,9 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
                 os.system(
                     "pip install "
                     f"--target ./{self.directory()}/{self.runtime()} "
-                    "--upgrade --platform manylinux2014_x86_64 --only-binary=:all: "
+                    "--upgrade "
+                    "--platform manylinux2014_x86_64 --only-binary=:all: "
+                    "--platform manylinux2014_aarch64 --only-binary=:all: "
                     f"--implementation cp {dependency}"
                 )
         except TypeError:
