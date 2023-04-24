@@ -58,13 +58,10 @@ class LambdaLayer(deploy_lambda.LambdaDeployer):
     def install_dependencies(self):
         try:
             for dependency in self.dependencies:
-                # os.system(
-                #     f"pip install --target ./{self.directory()}/{self.runtime()} {dependency} --upgrade --platform linux_x86_64 --only-binary=:all: --platform linux_aarch64 --only-binary=:all:"
-                # )
                 os.system(
                     "pip install "
-                    f"--target ./{self.directory()}/{self.runtime()} "
                     "--upgrade "
+                    f"--target ./{self.directory()}/{self.runtime()} "
                     "--platform manylinux2014_x86_64 --only-binary=:all: "
                     "--platform manylinux2014_aarch64 --only-binary=:all: "
                     f"--implementation cp {dependency}"
