@@ -6,7 +6,7 @@ from . import deploy_lambda
 
 class LambdaLayer(deploy_lambda.LambdaDeployer):
     def __init__(
-        self, dependencies=None, bucket_name=None, profile_name="DEV", name=None
+        self, dependencies=None, bucket_name=None, profile_name=os.getenv('AWS_PROFILE', 'DEV'), name=None
     ):
         super().__init__(bucket_name=bucket_name, profile_name=profile_name)
         self.dependencies = dependencies
