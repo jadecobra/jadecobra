@@ -140,3 +140,6 @@ class TestCase(unittest.TestCase):
         self.assertEqual(
             sorted(dir(thing)), sorted(attributes)
         )
+
+    def publish(self):
+        toolkit.publish()

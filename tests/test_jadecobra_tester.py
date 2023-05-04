@@ -148,6 +148,7 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'id',
                 'longMessage',
                 'maxDiff',
+                'publish',
                 'run',
                 'setUp',
                 'setUpClass',
