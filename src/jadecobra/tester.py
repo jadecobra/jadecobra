@@ -136,17 +136,15 @@ class TestCase(unittest.TestCase):
         reality = toolkit.read_json(f'cdk.out/{stack_name}')
         expectation = toolkit.read_json(f'tests/fixtures/{stack_name}')
         for dictionary in (reality, expectation):
-            assets = self.filter_keys(
+            for asset in self.filter_keys(
                 dictionary=dictionary['Parameters'],
                 filter='Asset',
-            )
-            layers = self.filter_keys(
+            ):
+                dictionary['Parameters'].pop(asset)
+            for layer in self.filter_keys(
                 dictionary=dictionary['Resources'],
                 filter='LambdaLayer',
-            )
-            for asset in assets:
-                dictionary['Parameters'].pop(asset)
-            for layer in layers:
+            ):
                 dictionary['Resources'][layer]['Properties'].pop('Content')
         self.assertEqual(reality, expectation)
 
