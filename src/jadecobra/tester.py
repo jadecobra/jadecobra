@@ -22,9 +22,7 @@ def run_tests():
     os.system('sniffer')
 
 def update_requirements():
-    requirements = [
-        'jadecobra',
-    ]
+    requirements = []
     if sys.platform.startswith('linux'):
         requirements.append('pyinotify')
     elif sys.platform.startswith('win32'):
@@ -34,7 +32,7 @@ def update_requirements():
     with open('requirements.txt') as file:
         requirements.append((line.strip() for line in file))
     with open('requirements.txt', 'a') as file:
-        for requirement in set(requirements):
+        for requirement in list(set(requirements)):
             file.write(requirement)
 
 def create_test_file(project_name):
