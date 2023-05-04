@@ -128,8 +128,10 @@ class TestCase(unittest.TestCase):
         '''
         reality = toolkit.read_json(f'cdk.out/{stack_name}')
         expectation = toolkit.read_json(f'tests/fixtures/{stack_name}')
-        for dictionary in r(reality, expectation):
-            dictionary.pop('Parameters')
+        for dictionary in (reality, expectation):
+            for key in dictionary['Parameters'].keys():
+                if 'Asset' in key:
+                    dictionary['Parameters'].pop(key)
             for key in dictionary.keys():
                 if 'LambdaLayer' in key:
                     dictionary['Resources'][key]['Properties'].pop('Content')
