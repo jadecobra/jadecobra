@@ -122,6 +122,13 @@ class TestCase(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0)
 
+    @staticmethod
+    def filter_keys(dictionary:dict=None, filter=None):
+        return (
+            name for name in list(dictionary.keys())
+            if filter in name
+        )
+
     def assert_cdk_templates_equal(self, stack_name):
         '''Check if stack_name in cdk.out folder and tests/fixtures are the same
         Remove Layer assets because they change on every run which creates an infinite loop in testing
@@ -129,12 +136,18 @@ class TestCase(unittest.TestCase):
         reality = toolkit.read_json(f'cdk.out/{stack_name}')
         expectation = toolkit.read_json(f'tests/fixtures/{stack_name}')
         for dictionary in (reality, expectation):
-            for key in dictionary['Parameters'].keys():
-                if 'Asset' in key:
-                    dictionary['Parameters'].pop(key)
-            for key in dictionary.keys():
-                if 'LambdaLayer' in key:
-                    dictionary['Resources'][key]['Properties'].pop('Content')
+            assets = self.filter_keys(
+                dictionary=dictionary['Parameters'],
+                filter='Asset',
+            )
+            layers = self.filter_keys(
+                dictionary=dictionary['Resources'],
+                filter='LambdaLayer',
+            )
+            for asset in assets:
+                dictionary['Parameters'].pop(asset)
+            for layer in layers:
+                dictionary['Resources'][layer]['Properties'].pop('Content')
         self.assertEqual(reality, expectation)
 
     def assert_attributes_equal(self, thing=None, attributes=None):

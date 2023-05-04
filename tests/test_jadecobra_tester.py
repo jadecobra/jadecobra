@@ -145,6 +145,7 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'failUnlessEqual',
                 'failUnlessRaises',
                 'failureException',
+                'filter_keys',
                 'id',
                 'longMessage',
                 'maxDiff',
