@@ -22,7 +22,7 @@ def run_tests():
     os.system('sniffer')
 
 def update_requirements():
-    requirements = []
+    requirements = ['sniffer']
     if sys.platform.startswith('linux'):
         requirements.append('pyinotify')
     elif sys.platform.startswith('win32'):
