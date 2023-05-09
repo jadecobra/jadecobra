@@ -135,15 +135,21 @@ class TestCase(unittest.TestCase):
         expectation = toolkit.read_json(f'tests/fixtures/{stack_name}')
         for dictionary in (reality, expectation):
             for asset in self.filter_keys(
-                dictionary=dictionary['Parameters'],
+                dictionary=dictionary.get('Parameters', {}),
                 filter='Asset',
             ):
-                dictionary['Parameters'].pop(asset)
+                try:
+                    dictionary['Parameters'].pop(asset)
+                except KeyError:
+                    'nothing to do here'
             for layer in self.filter_keys(
-                dictionary=dictionary['Resources'],
+                dictionary=dictionary.get('Resources'),
                 filter='LambdaLayer',
             ):
-                dictionary['Resources'][layer]['Properties'].pop('Content')
+                try:
+                    dictionary['Resources'][layer]['Properties'].pop('Content')
+                except KeyError:
+                    'nothing to do here'
         self.assertEqual(reality, expectation)
 
     def assert_attributes_equal(self, thing=None, attributes=None):
