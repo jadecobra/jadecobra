@@ -128,6 +128,7 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'assert_',
                 'assert_attributes_equal',
                 'assert_cdk_templates_equal',
+                'clean_up_cdk_assets',s
                 'countTestCases',
                 'create_cdk_templates',
                 'debug',

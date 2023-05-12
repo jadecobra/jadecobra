@@ -108,8 +108,17 @@ class TestCase(unittest.TestCase):
 
     maxDiff = None
 
+    @staticmethod
+    def clean_up_cdk_assets():
+        (
+            os.rmdir(item) for item in os.listdir('cdk.out')
+            if item.startswith('asset.')
+        )
+
+
     def create_cdk_templates(self):
         '''Create CloudFormation using CDK with presets'''
+        self.clean_up_cdk_assets()
         result = toolkit.run_in_shell(
             (
                 'cdk ls '
