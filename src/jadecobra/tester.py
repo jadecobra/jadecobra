@@ -143,6 +143,14 @@ class TestCase(unittest.TestCase):
         reality = toolkit.read_json(f'cdk.out/{stack_name}')
         expectation = toolkit.read_json(f'tests/fixtures/{stack_name}')
         for dictionary in (reality, expectation):
+            for tag in self.filter_keys(
+                dictionary=dictionary.get('Resources'),
+                filter='Tags'
+            ):
+                try:
+                    dictionary['Resources'][tag].pop('DateCreated')
+                except KeyError:
+                    'nothing to do here'
             for asset in self.filter_keys(
                 dictionary=dictionary.get('Parameters', {}),
                 filter='Asset',
