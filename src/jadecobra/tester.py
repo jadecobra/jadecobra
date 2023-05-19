@@ -148,7 +148,9 @@ class TestCase(unittest.TestCase):
                 filter='Tags'
             ):
                 try:
-                    dictionary['Resources'][tag].pop('DateCreated')
+                    for key in dictionary['Resources'][tag]:
+                        if key == 'DateCreated':
+                            dictionary['Resources'][tag].remove(key)
                 except KeyError:
                     'nothing to do here'
             for asset in self.filter_keys(
