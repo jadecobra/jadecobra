@@ -136,6 +136,35 @@ class TestCase(unittest.TestCase):
             if filter in name
         )
 
+    @staticmethod
+    def remove_date_created(dictionary):
+        resources = dictionary['Resources']
+        for resource in resources:
+            tags = resources[resource]['Properties']['Tags']
+            for tag in tags:
+                if tag['Key'] == 'DateCreated':
+                    tags.remove(tag)
+
+    def remove_layer_assets(self, dictionary):
+        for layer in self.filter_keys(
+            dictionary=dictionary.get('Resources'),
+            filter='LambdaLayer',
+        ):
+            try:
+                dictionary['Resources'][layer]['Properties'].pop('Content')
+            except KeyError:
+                'nothing to do here'
+
+    def remove_assets(self, dictionary):
+        for asset in self.filter_keys(
+            dictionary=dictionary.get('Parameters', {}),
+            filter='Asset',
+        ):
+            try:
+                dictionary['Parameters'].pop(asset)
+            except KeyError:
+                'nothing to do here'
+
     def assert_cdk_templates_equal(self, stack_name):
         '''Check if stack_name in cdk.out folder and tests/fixtures are the same
         Remove Layer assets because they change on every run which creates an infinite loop in testing
@@ -143,32 +172,9 @@ class TestCase(unittest.TestCase):
         reality = toolkit.read_json(f'cdk.out/{stack_name}')
         expectation = toolkit.read_json(f'tests/fixtures/{stack_name}')
         for dictionary in (reality, expectation):
-            for tag in self.filter_keys(
-                dictionary=dictionary.get('Resources'),
-                filter='Tags'
-            ):
-                try:
-                    for key in dictionary['Resources'][tag]:
-                        if key == 'DateCreated':
-                            dictionary['Resources'][tag].remove(key)
-                except KeyError:
-                    'nothing to do here'
-            for asset in self.filter_keys(
-                dictionary=dictionary.get('Parameters', {}),
-                filter='Asset',
-            ):
-                try:
-                    dictionary['Parameters'].pop(asset)
-                except KeyError:
-                    'nothing to do here'
-            for layer in self.filter_keys(
-                dictionary=dictionary.get('Resources'),
-                filter='LambdaLayer',
-            ):
-                try:
-                    dictionary['Resources'][layer]['Properties'].pop('Content')
-                except KeyError:
-                    'nothing to do here'
+            self.remove_date_created(dictionary)
+            self.remove_assets(dictionary)
+            self.remove_layer_assets(dictionary)
         self.assertEqual(reality, expectation)
 
     def assert_attributes_equal(self, thing=None, attributes=None):
