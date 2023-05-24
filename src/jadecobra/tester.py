@@ -140,10 +140,14 @@ class TestCase(unittest.TestCase):
     def remove_date_created(dictionary):
         resources = dictionary['Resources']
         for resource in resources:
-            tags = resources[resource]['Properties']['Tags']
-            for tag in tags:
-                if tag['Key'] == 'DateCreated':
-                    tags.remove(tag)
+            try:
+                tags = resources[resource]['Properties']['Tags']
+            except KeyError:
+                'nothing to do here'
+            else:
+                for tag in tags:
+                    if tag['Key'] == 'DateCreated':
+                        tags.remove(tag)
 
     def remove_layer_assets(self, dictionary):
         for layer in self.filter_keys(
