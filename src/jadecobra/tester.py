@@ -146,8 +146,11 @@ class TestCase(unittest.TestCase):
                 'nothing to do here'
             else:
                 for tag in tags:
-                    if tag['Key'] == 'DateCreated':
-                        tags.remove(tag)
+                    try:
+                        if tag['Key'] == 'DateCreated':
+                            tags.remove(tag)
+                    except TypeError:
+                        'nothing to do here'
 
     def remove_layer_assets(self, dictionary):
         for layer in self.filter_keys(
