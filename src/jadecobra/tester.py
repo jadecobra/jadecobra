@@ -150,7 +150,7 @@ class TestCase(unittest.TestCase):
                         if tag['Key'] == 'DateCreated':
                             tags.remove(tag)
                 if isinstance(tags, dict):
-                    for tag in tags.keys():
+                    for tag in list(tags.keys()):
                         if tag == 'DateCreated':
                             tags.pop(tag)
 
