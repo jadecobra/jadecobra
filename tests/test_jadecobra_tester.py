@@ -153,6 +153,7 @@ class TestJadeCobraTester(src.jadecobra.tester.TestCase):
                 'publish',
                 'remove_assets',
                 'remove_date_created',
+                'remove_directory',
                 'remove_layer_assets',
                 'run',
                 'setUp',
