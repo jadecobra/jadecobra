@@ -110,11 +110,13 @@ class TestCase(unittest.TestCase):
 
     @staticmethod
     def clean_up_cdk_assets():
-        (
-            os.rmdir(item) for item in os.listdir('cdk.out')
-            if item.startswith('asset.')
-        )
-
+        try:
+            (
+                os.rmdir(item) for item in os.listdir('cdk.out')
+                if item.startswith('asset.')
+            )
+        except FileNotFoundError:
+            'nothing to do here'
 
     def create_cdk_templates(self):
         '''Create CloudFormation using CDK with presets'''
